@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS contactRequests (
     lastname VARCHAR(50) NOT NULL,
     email VARCHAR(60) NOT NULL,
     message TEXT NOT NULL,
-    requestDate DATE DEFAULT NOW(),
+    requestDate DATE DEFAULT (DATE( NOW() )),
     topic_id INT NOT NULL,
     client_id INT DEFAULT null,
     requestStatus_id INT NOT NULL DEFAULT 1,
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS contactRequests (
     FOREIGN KEY (requestStatus_id) REFERENCES requestStatus(id)
 ) engine = innodb;
 
--- CREATION UTILISATEURS / PRIVILEGES
+-- CREATION UTILISATEURS / PRIVILEGES -- NON DISPO AVEC JAWSDB/HEROKU EN VERSION GRATUITE
 
 -- admin
 CREATE USER 'admin'@'localhost' IDENTIFIED BY '@@34tcx7ES';
@@ -115,18 +115,22 @@ GRANT ALL PRIVILEGES ON hypnos.* TO 'admin'@'localhost';
 
 -- manager
 CREATE USER 'manager'@'localhost' IDENTIFIED BY '7@rn2Tp2H@';
-GRANT INSERT, UPDATE, DELETE ON hypnos.suites, hypnos.pictures, hypnos.prices TO 'manager'@'localhost';
+GRANT INSERT, UPDATE, DELETE ON hypnos.suites TO 'manager'@'localhost';
+GRANT INSERT, UPDATE, DELETE ON hypnos.pictures TO 'manager'@'localhost';
+GRANT INSERT, UPDATE, DELETE ON hypnos.prices TO 'manager'@'localhost';
 GRANT SELECT ON hypnos.* TO 'manager'@'localhost';
 
 -- client
 CREATE USER 'client'@'localhost' IDENTIFIED BY 'WMh9@t7@p3';
-GRANT INSERT, UPDATE ON hypnos.clients, hypnos.bookings TO 'client'@'localhost';
+GRANT INSERT, UPDATE ON hypnos.clients TO 'client'@'localhost';
+GRANT INSERT, UPDATE ON hypnos.bookings TO 'client'@'localhost';
 GRANT INSERT ON hypnos.contactRequests TO 'client'@'localhost';
 GRANT SELECT ON hypnos.* TO 'client'@'localhost';
 
 -- no-auth
 CREATE USER 'noauth'@'localhost' IDENTIFIED BY '2@x@RMqm57';
-GRANT INSERT ON hypnos.clients, hypnos.contactRequests TO 'noauth'@'localhost';
+GRANT INSERT ON hypnos.clients TO 'noauth'@'localhost';
+GRANT INSERT ON hypnos.contactRequests TO 'noauth'@'localhost';
 GRANT SELECT ON hypnos.* TO 'noauth'@'localhost';
 
 -- INSERTION DES DONNEES
