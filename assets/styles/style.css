@@ -1,0 +1,79 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Neuton', serif;
+    font-weight: 300;
+    color: #454545;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Lora', serif;
+    font-style: italic;
+}
+
+/* COULEURS */
+
+.text-gold {
+    color: #AB911D;
+}
+
+.bg-gold {
+    background-color: #AB911D;
+}
+
+.text-dblue {
+    color: #1A1C34;
+}
+
+.bg-dblue {
+    background-color: #1A1C34;
+}
+
+.text-offwhite {
+    color: #FFFEFA;
+}
+
+.bg-offwhite {
+    background-color: #FFFEFA;
+}
+
+.text-tilered {
+    color: #931F1D;
+}
+
+.text-grey {
+    color: #454545;
+}
+
+/* styles */
+
+header {
+    height: 20vh;
+    border-bottom: #AB911D 5px solid;
+}
+
+header div img {
+    max-height: 15vh;
+}
+
+.nav-link, footer a {
+    color: #FFFEFA;
+    text-decoration: none;
+}
+
+.nav-link:hover, footer a:hover{
+    color: #AB911D;
+}
+
+main {
+    background-image: url('../img/hypnos-bg-pattern.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+footer {
+    border-top: #AB911D 5px solid;
+
+}

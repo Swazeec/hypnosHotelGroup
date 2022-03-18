@@ -49,19 +49,19 @@ CREATE TABLE IF NOT EXISTS suites (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(50) NOT NULL,
     description TEXT NOT NULL,
-    primePicture TEXT NOT NULL,
+    primePicture TEXT,
     link TEXT NOT NULL,
     price_id INT NOT NULL,
     hotel_id INT NOT NULL,
     FOREIGN KEY (price_id) REFERENCES prices(id),
-    FOREIGN KEY (hotel_id) REFERENCES hotels(id)
+    FOREIGN KEY (hotel_id) REFERENCES hotels(id) ON DELETE CASCADE
 ) engine = innodb;
 
 CREATE TABLE IF NOT EXISTS pictures (
     id INT AUTO_INCREMENT PRIMARY KEY,
     picture TEXT NOT NULL,
     suite_id INT NOT NULL,
-    FOREIGN KEY (suite_id) REFERENCES suites(id)
+    FOREIGN KEY (suite_id) REFERENCES suites(id) ON DELETE CASCADE
 ) engine = innodb;
 
 CREATE TABLE IF NOT EXISTS bookingStatus (
@@ -78,11 +78,16 @@ CREATE TABLE IF NOT EXISTS bookings (
     suite_id INT NOT NULL,
     client_id INT NOT NULL,
     FOREIGN KEY (bookingStatus_id) REFERENCES bookingStatus(id),
-    FOREIGN KEY (suite_id) REFERENCES suites(id),
+    FOREIGN KEY (suite_id) REFERENCES suites(id) ON DELETE CASCADE,
     FOREIGN KEY (client_id) REFERENCES clients(id)
 ) engine = innodb;
 
 CREATE TABLE IF NOT EXISTS topics (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+) engine = innodb;
+
+CREATE TABLE IF NOT EXISTS requestStatus (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL
 ) engine = innodb;
@@ -96,8 +101,10 @@ CREATE TABLE IF NOT EXISTS contactRequests (
     requestDate DATE DEFAULT NOW(),
     topic_id INT NOT NULL,
     client_id INT DEFAULT null,
+    requestStatus_id INT NOT NULL DEFAULT 1,
     FOREIGN KEY (topic_id) REFERENCES topics(id),
-    FOREIGN KEY (client_id) REFERENCES clients(id)
+    FOREIGN KEY (client_id) REFERENCES clients(id),
+    FOREIGN KEY (requestStatus_id) REFERENCES requestStatus(id)
 ) engine = innodb;
 
 -- CREATION UTILISATEURS / PRIVILEGES
@@ -214,7 +221,11 @@ INSERT INTO topics (name) VALUE ('Je souhaite commander un service supplémentai
 INSERT INTO topics (name) VALUE ('Je souhaite en savoir plus sur une suite');
 INSERT INTO topics (name) VALUE ('J''ai un souci avec cette application');
 
+-- requestStatus
+INSERT INTO requestStatus (name) VALUE ('non lu');
+INSERT INTO requestStatus (name) VALUE ('lu');
+
 -- contactRequests
 INSERT INTO contactRequests (firstname, lastname, email, message, requestDate, topic_id, client_id) VALUES ('Wally', 'Joysey', 'wjoysey0@weebly.com', 'Bonjour, et merci pour vos si belles suites. Pour mon prochain séjour, je souhaiterais ajouter un service à ma réservation. J''aimerais profiter d''une séance de massage à mon arrivée. Est-ce possible ? Merci !', '2022-03-17', 2, 1);
 INSERT INTO contactRequests (firstname, lastname, email, message, requestDate, topic_id, client_id) VALUES ('Fabien', 'Durand', 'fdurand@pouet.com', 'Bonjour, je ne comprends pas du tout votre application, et je n''arrive pas à réserver une suite, pouvez-vous m''aider ? Merci !', '2022-03-18' 4, null);
-INSERT INTO contactRequests (firstname, lastname, email, message, requestDate, topic_id, client_id) VALUES ('Christy', 'Le febre', 'clefebre2@washingtonpost.com', 'Bonjour, je ne suis pas du tout satisfaite de mon séjour dans votre hôtel. La suite ne correspondait pas du tout aux photos, il manquait une chaise ! Indamissible. Merci de me proposer un geste commercial. Bien à vous.', '2022-03-20', 1, 3);
+INSERT INTO contactRequests (firstname, lastname, email, message, requestDate, topic_id, client_id, requestStatus_id) VALUES ('Christy', 'Le febre', 'clefebre2@washingtonpost.com', 'Bonjour, je ne suis pas du tout satisfaite de mon séjour dans votre hôtel. La suite ne correspondait pas du tout aux photos, il manquait une chaise ! Indamissible. Merci de me proposer un geste commercial. Bien à vous.', '2022-03-20', 1, 3,2);
