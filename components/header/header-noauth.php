@@ -16,7 +16,7 @@
 </head>
 <body class="bg-offwhite">
     <main class="container-fluid">
-        <header class="row bg-dblue p-3 d-flex justify-content-between">
+        <header class="row bg-dblue mb-5 p-3 d-flex justify-content-between">
             <div class="col-lg-2 col">
                 <a href="./index.php"><img class="" src="./assets/img/hypnos-logo-gold.svg" alt="logo Hypnos"></a>
             </div>
@@ -34,7 +34,7 @@
                                     <a class="nav-link" href="./index.php">ACCUEIL</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">NOS HÔTELS</a>
+                                    <a class="nav-link" href="./index.php#ourHotels">NOS HÔTELS</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">RÉSERVEZ</a>
@@ -67,7 +67,7 @@
                                     <a class="nav-link" href="./index.php">ACCUEIL</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">NOS HÔTELS</a>
+                                    <a class="nav-link" href="./index.php">NOS HÔTELS</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">RÉSERVEZ</a>

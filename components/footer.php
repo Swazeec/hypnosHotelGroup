@@ -1,9 +1,9 @@
-<footer class="row fixed-bottom bg-dblue">
+<footer class="row mt-5 bg-dblue">
     <div class="col-12 text-center pt-3">
         <img src="./assets/img/hypnos-footer-ornament.svg" alt="ornement">
     </div>
     <div class="col-12 text-center pt-3 d-flex flex-column d-lg-block">
-        <a class="p-lg-3" href="./index.php">Nos hôtels</a>
+        <a class="p-lg-3" href="./index.php#ourHotels">Nos hôtels</a>
         <a class="p-lg-3" href="#">Réserver une suite</a>
         <a class="p-lg-3" href="#">Contact</a>
         <a class="p-lg-3" href="#">Mentions légales</a>
