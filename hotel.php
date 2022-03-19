@@ -50,7 +50,7 @@ if(!isset($_GET['hotel']) && intval($_GET['hotel']) === 0){
                                     <h6 class="card-subtitle mb-2 text-lgrey">à partir de <?= $suiteInfos['price'] ?> € la nuit</h6>
                                     <p class="card-text py-2"><?= $suiteInfos['description'] ?></p>
                                 </div>
-                                <div class="text-center row px-2">
+                                <div class="text-center row px-2 d-flex justify-content-end">
                                     <?php 
                                     $picturesReq = $bdd->prepare('SELECT * FROM pictures WHERE suite_id = :sid ;');
                                     $picturesReq->bindValue(':sid', $suiteInfos['id'], PDO::PARAM_INT);
