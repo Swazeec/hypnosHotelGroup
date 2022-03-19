@@ -2,7 +2,7 @@
 require_once('./components/db/db.php');
 require_once('./components/header/header-noauth.php');
 ?>
-<section class="row">
+<section class="row  px-lg-5">
     <!-- présentation du groupe -->
     <div class="col-md-6 d-none d-md-block text-center align-self-center">
         <img class="img-fluid" src="./assets/img/hypnos-home-flowers-blue.svg" alt="illustration, fleurs">
@@ -33,7 +33,7 @@ require_once('./components/header/header-noauth.php');
                             <p class="card-text"><?= $hotelInfos['description'] ?></p>
                         </div>
                         <div class="text-center d-flex flex-column px-2">
-                            <a type="button" href="#" class="btn bg-gold rounded-pill text-offwhite px-2">Voir les suites</a>
+                            <a type="button" href="./hotel.php?hotel=<?= $hotelInfos['id'] ?>" class="btn bg-gold rounded-pill text-offwhite px-2">Voir les suites</a>
                         </div>
                     </div>
                 </div>

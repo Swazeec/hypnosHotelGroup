@@ -20,6 +20,10 @@ h1, h2, h3 {
     background-color: #AB911D;
 }
 
+.border-gold {
+    border: #AB911D 1px solid;
+}
+
 .text-dblue {
     color: #1A1C34;
 }
@@ -80,4 +84,14 @@ main {
 footer {
     border-top: #AB911D 5px solid;
 
+}
+
+/* PAGE HOTEL */
+.card__img{
+    height: 100%;
+    min-height: 200px;
+    width: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
 }
