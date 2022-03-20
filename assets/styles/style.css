@@ -55,7 +55,7 @@ h1, h2, h3 {
 /* styles */
 
 header {
-    height: 20vh;
+    min-height: 20vh;
     border-bottom: #AB911D 5px solid;
 }
 
@@ -72,6 +72,14 @@ header div img {
     color: #AB911D;
 }
 
+section a {
+    color: #AB911D;
+    text-decoration: none;
+}
+section a:hover {
+    color:#1A1C34;
+}
+
 main {
     background-image: url('../img/hypnos-bg-pattern.svg');
     background-repeat: no-repeat;
@@ -79,6 +87,10 @@ main {
     background-attachment: fixed;
     min-height: 100vh;
     width: 100vw;
+}
+
+input.form-control {
+    border: #AB911D 1px solid;
 }
 
 footer {

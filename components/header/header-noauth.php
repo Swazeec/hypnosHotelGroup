@@ -15,9 +15,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 <body class="bg-offwhite">
-    <main class="container-fluid">
+    <main class="container-fluid d-flex flex-column justify-content-between">
         <header class="row bg-dblue mb-5 p-3 d-flex justify-content-between">
-            <div class="col-lg-2 col">
+            <div class="col-lg-2 col my-auto">
                 <a href="./index.php"><img class="" src="./assets/img/hypnos-logo-gold.svg" alt="logo Hypnos"></a>
             </div>
             <!-- NAVBAR DESKTOP -->
