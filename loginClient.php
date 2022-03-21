@@ -1,6 +1,18 @@
 <?php
+session_start();
 require_once('./components/db/db.php');
-require_once('./components/header/header-noauth.php');
+require_once('./components/loginClientScript.php');
+if(isset($_SESSION['connect'])){
+    if($_SESSION['connect'] == 'client'){
+        header('location:./myBookings.php');
+    } else if ($_SESSION['connect'] == 'pro'){
+        require_once('./components/header/header-pro.php');
+    } else {
+        require_once('./components/header/header-noauth.php');
+    }
+} else {
+    require_once('./components/header/header-noauth.php');
+}
 ?>
 <section class="row px-lg-5" >
     <!-- illustration -->
@@ -11,6 +23,12 @@ require_once('./components/header/header-noauth.php');
     <div class="col-12 col-md-6" id="logInSection">
         <h2 class="text-tilered">Se connecter</h2>
         <p>Nouveau client ? <a href="#" id="signInLink">S'inscrire</a></p>
+        <?php 
+        if(isset($_GET['error']) && $_GET['error'] == 'invalid'){ ?>
+            <div class="row py-2 text-center bg-danger">
+                <p class="text-white m-0"> Identifiants invalides</p>
+            </div>
+        <?php } ?>
         <form action="" method="post" class="row" id="loginClientForm">
             <div class="mb-3 col-12">
                 <label for="emailLogIn" class="form-label text-gold">Email</label>

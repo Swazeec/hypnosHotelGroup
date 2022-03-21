@@ -1,6 +1,17 @@
 <?php
+session_start();
 require_once('./components/db/db.php');
-require_once('./components/header/header-noauth.php');
+if(isset($_SESSION['connect'])){
+    if($_SESSION['connect'] == 'client'){
+        require_once('./components/header/header-client.php');
+    } else if ($_SESSION['connect'] == 'pro'){
+        require_once('./components/header/header-pro.php');
+    } else {
+        require_once('./components/header/header-noauth.php');
+    }
+} else {
+    require_once('./components/header/header-noauth.php');
+}
 ?>
 <section class="row  px-lg-5">
     <!-- présentation du groupe -->

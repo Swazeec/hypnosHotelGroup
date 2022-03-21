@@ -13,8 +13,6 @@ signUpLink.addEventListener('click', goToSignUp)
 
 // FONCTION DE VERIFICATION DE CHAMPS
 
-
-
 let error = 0
 
 // VALIDATION CONNEXION
@@ -28,18 +26,20 @@ let passwordLogIn = document.getElementById('passwordLogIn')
 logBtn.addEventListener('click', (e)=>{
     if(checkEmail(emailLogIn.value) === false){
         emailLogHelp.classList.remove('d-none')
+        error += 1
     }else {
         emailLogHelp.classList.add('d-none')
     } 
     if(checkPwd(passwordLogIn.value) === false){
         pwdLogHelp.classList.remove('d-none')
+        error += 1
     } else {
         pwdLogHelp.classList.add('d-none')
     }
 
     if(error !=0){
         e.preventDefault()
-        error =0
+        error = 0
     }
 })
 
@@ -59,7 +59,7 @@ let pwdSignHelp = document.getElementById('pwdSignHelp')
 
 let signUpBtn = document.getElementById('signUpBtn')
 
-signUpBtn.addEventListener('click', (e)=>{
+signUpBtn.addEventListener('click', (event)=>{
     if(checkName(firstname.value) === false){
         firstnameHelp.classList.remove('d-none')
         error += 1
@@ -88,7 +88,7 @@ signUpBtn.addEventListener('click', (e)=>{
     }
 
     if(error !=0){
-        e.preventDefault()
-        error =0
+        event.preventDefault()
+        error = 0
     }
 })

@@ -37,7 +37,7 @@
                                     <a class="nav-link" href="./index.php#ourHotels">NOS HÔTELS</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">RÉSERVEZ</a>
+                                    <a class="nav-link" href="./booking.php">RÉSERVEZ</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="./contact.php">CONTACT</a>
@@ -70,7 +70,7 @@
                                     <a class="nav-link" href="./index.php#ourHotels">NOS HÔTELS</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">RÉSERVEZ</a>
+                                    <a class="nav-link" href="./booking.php">RÉSERVEZ</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="./contact.php">CONTACT</a>

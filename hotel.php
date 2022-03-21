@@ -1,7 +1,20 @@
 <?php
+session_start();
 if(!isset($_GET['hotel']) && intval($_GET['hotel']) === 0){
     header('location:./index.php?error=invalidHotel');
 } else {
+    if(isset($_SESSION['connect'])){
+        if($_SESSION['connect'] == 'client'){
+            require_once('./components/header/header-client.php');
+        } else if ($_SESSION['connect'] == 'pro'){
+            require_once('./components/header/header-pro.php');
+        } else {
+            require_once('./components/header/header-noauth.php');
+        }
+    } else {
+        require_once('./components/header/header-noauth.php');
+    }
+
     $hotelId = htmlspecialchars($_GET['hotel']);
     require_once('./components/db/db.php');
     $hotelReq = $bdd->prepare('SELECT * FROM hotels WHERE id = :id;');
