@@ -40,10 +40,10 @@
                                     <a class="nav-link" href="#">RÉSERVEZ</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">CONTACT</a>
+                                    <a class="nav-link" href="./contact.php">CONTACT</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">INSCRIPTION/CONNEXION</a>
+                                    <a class="nav-link" href="./loginClient.php">INSCRIPTION/CONNEXION</a>
                                 </li>
                             </ul>
                         </div>
@@ -67,16 +67,16 @@
                                     <a class="nav-link" href="./index.php">ACCUEIL</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./index.php">NOS HÔTELS</a>
+                                    <a class="nav-link" href="./index.php#ourHotels">NOS HÔTELS</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">RÉSERVEZ</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">CONTACT</a>
+                                    <a class="nav-link" href="./contact.php">CONTACT</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">INSCRIPTION/CONNEXION</a>
+                                    <a class="nav-link" href="./loginClient.php">INSCRIPTION/CONNEXION</a>
                                 </li>
                             </ul>
                             

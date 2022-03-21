@@ -89,7 +89,7 @@ main {
     width: 100vw;
 }
 
-input.form-control {
+input.form-control, select.form-select, textarea.form-control {
     border: #AB911D 1px solid;
 }
 

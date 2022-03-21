@@ -3,9 +3,9 @@ require_once('./components/db/db.php');
 require_once('./components/header/header-noauth.php');
 ?>
 <section class="row px-lg-5" >
-    <!-- présentation du groupe -->
+    <!-- illustration -->
     <div class="col-md-6 d-none d-md-block text-center align-self-center">
-        <img class="img-fluid" src="./assets/img/hypnos-login.svg" alt="illustration, contact">
+        <img class="img-fluid" src="./assets/img/hypnos-login.svg" alt="illustration, devices">
     </div>
     <!-- SE CONNECTER -->
     <div class="col-12 col-md-6" id="logInSection">
@@ -62,6 +62,7 @@ require_once('./components/header/header-noauth.php');
 require_once('./components/footer.php');
 ?>
 </main>
+<script src="./components/scripts/functions.js"></script>
 <script src="./components/scripts/loginClient.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>

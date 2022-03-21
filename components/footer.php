@@ -5,10 +5,10 @@
     <div class="col-12 text-center pt-3 d-flex flex-column d-lg-block">
         <a class="p-lg-3" href="./index.php#ourHotels">Nos hôtels</a>
         <a class="p-lg-3" href="#">Réserver une suite</a>
-        <a class="p-lg-3" href="#">Contact</a>
+        <a class="p-lg-3" href="./contact.php">Contact</a>
         <a class="p-lg-3" href="#">Mentions légales</a>
         <a class="p-lg-3" href="#">CGU</a>
-        <a class="p-lg-3" href="#">Accès professionnel</a>
+        <a class="p-lg-3" href="./loginPro.php">Accès professionnel</a>
     </div>
     <div class="col-12 text-center pt-3">
         <a href="#"><i class="bi bi-facebook text-offwhite px-2"></i></a>

@@ -1,0 +1,23 @@
+{
+  "name": "hypnos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Swazeec/hypnosHotelGroup.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Swazeec/hypnosHotelGroup/issues"
+  },
+  "homepage": "https://github.com/Swazeec/hypnosHotelGroup#readme",
+  "directories": {
+    "test": "test"
+  }
+}
