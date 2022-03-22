@@ -11,11 +11,13 @@ let passwordLogIn = document.getElementById('passwordLogIn')
 logBtn.addEventListener('click', (e)=>{
     if(checkEmail(emailLogIn.value) === false){
         emailLogHelp.classList.remove('d-none')
+        error +=1
     }else {
         emailLogHelp.classList.add('d-none')
     } 
     if(checkPwd(passwordLogIn.value) === false){
         pwdLogHelp.classList.remove('d-none')
+        error +=1
     } else {
         pwdLogHelp.classList.add('d-none')
     }

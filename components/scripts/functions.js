@@ -1,6 +1,6 @@
 function checkEmail(value){
     let rgxEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    if(!rgxEmail.test(value) || value === true){
+    if(!rgxEmail.test(value) || value === true || value > 60){
         return false
     } 
     return true
@@ -16,7 +16,7 @@ function checkPwd(value){
 
 function checkName(value){
     let rgxNames = /^[a-zA-ZÀ-ž\-\'\ ]*$/g
-    if(!rgxNames.test(value) || value.length < 2 || value === true){
+    if(!rgxNames.test(value) || value.length < 2 || value === true  || value > 60){
         return false
     }
     return true

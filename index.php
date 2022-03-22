@@ -13,7 +13,7 @@ if(isset($_SESSION['connect'])){
     require_once('./components/header/header-noauth.php');
 }
 ?>
-<section class="row  px-lg-5">
+<section class="row  px-lg-5 mt-5">
     <!-- présentation du groupe -->
     <div class="col-md-6 d-none d-md-block text-center align-self-center">
         <img class="img-fluid" src="./assets/img/hypnos-home-flowers-blue.svg" alt="illustration, fleurs">

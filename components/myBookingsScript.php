@@ -14,6 +14,7 @@ if(!empty($_GET['delete']) && intval($_GET['delete'])){
             $bDeleteReq = $bdd->prepare('DELETE FROM bookings WHERE id = :id;');
             $bDeleteReq->bindValue(':id', $bookingId, PDO::PARAM_INT);
             $bDeleteReq->execute();
+            header('location:./myBookings.php?delete=success');
         } else {
             header('location:./myBookings.php?error=invalid');
         }

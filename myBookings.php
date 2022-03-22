@@ -14,8 +14,19 @@ if(isset($_SESSION['connect'])){
 } else {
     header('location:./loginClient.php'); 
 }
+if(!empty($_GET['delete']) && $_GET['delete'] ==='success'){ ?>
+    <div class="row py-2 text-center bg-success sticky-top">
+        <p class="text-white m-0">Réservation annulée avec succès !</p>
+    </div>
+<?php }
+if(!empty($_GET['error']) && $_GET['error'] ==='invalid'){ ?>
+    <div class="row py-2 text-center bg-danger sticky-top">
+        <p class="text-white m-0">Impossible de supprimer cette réservation. Pour plus d'informations, nous contacter.</p>
+    </div>
+<?php }
+
 ?>
-<section class="row  px-lg-5">
+<section class="row  px-lg-5 mt-5">
     <!-- présentation du groupe -->
     <div class="col-md-6 d-none d-md-block text-center align-self-center">
         <img class="img-fluid" src="./assets/img/hypnos-hotel-flower.svg" alt="illustration, fleurs">
@@ -35,7 +46,7 @@ if(isset($_SESSION['connect'])){
         $bookingsReq = $bdd->prepare('SELECT bookings.id AS id, 
                                     DATE_FORMAT(bookings.startDate, "%d/%m/%Y") AS startDate, 
                                     DATE_FORMAT(bookings.endDate, "%d/%m/%Y" ) AS endDate,
-                                   /*  DATE_FORMAT(bookings.cancellationDate, "%d/%m/%Y" ) AS  */bookings.cancellationDate, 
+                                   bookings.cancellationDate, 
                                     suites.title, 
                                     hotels.name
                                     FROM bookings 

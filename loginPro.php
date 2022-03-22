@@ -1,8 +1,24 @@
 <?php
+session_start();
+if(!empty($_SESSION['role'])){
+    if($_SESSION['role'] == 'admin'){
+        header('location:./adminDashboard.php');
+        exit();
+    } else if($_SESSION['role'] == 'manager'){
+        header('location:./managerDashboard.php');
+        exit();
+    } 
+}
 require_once('./components/db/db.php');
+require_once('./components/loginProScript.php');
 require_once('./components/header/header-noauth.php');
+if(isset($_GET['error']) && $_GET['error'] == 'invalid'){ ?>
+    <div class="row py-2 text-center bg-danger">
+        <p class="text-white m-0">Identifiants invalides. Accès réservé aux employés d'Hypnos.</p>
+    </div>
+<?php } 
 ?>
-<section class="row px-lg-5" >
+<section class="row px-lg-5 mt-5" >
     <!-- illustration -->
     <div class="col-md-6 d-none d-md-block text-center align-self-center">
         <img class="img-fluid" src="./assets/img/hypnos-login.svg" alt="illustration, devices">

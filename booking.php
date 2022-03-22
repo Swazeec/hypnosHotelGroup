@@ -13,7 +13,7 @@ if(isset($_SESSION['connect'])){
     require_once('./components/header/header-noauth.php');
 }
 ?>
-<section class="row px-lg-5" >
+<section class="row px-lg-5 mt-5" >
     <!-- présentation -->
     <div class="col-md-6 d-none d-md-block text-center align-self-center">
         <img class="img-fluid" src="./assets/img/hypnos-hotel-flower.svg" alt="illustration, fleurs">
@@ -32,13 +32,19 @@ if(isset($_SESSION['connect'])){
     <!-- NOUS CONTACTER -->
     <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
         <form action="" method="post" class="row" id="bookingForm">
-            
             <div class="mb-3 col-12">
                 <label for="suite" class="form-label text-gold">Votre suite</label>
                 <select class="form-select " id="suite" name="suite" required>
-                    <option value="1">Hôtel xxx (Rennes) - Suite Maija Isola</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <?php
+                    // POUR AFFICHAGE SUITES
+                    $suitesReq = $bdd->prepare('SELECT suites.id AS id, suites.title AS suite, hotels.name AS hotel, hotels.city
+                                                FROM suites
+                                                JOIN hotels ON hotels.id = suites.hotel_id');
+                    $suitesReq->execute();
+                    while($suiteInfos = $suitesReq->fetch(PDO::FETCH_ASSOC)){ ?>
+                        <option value="<?= $suiteInfos['id'] ?>"><?= $suiteInfos['hotel'] ?> (<?= $suiteInfos['city'] ?>) - Suite <?= $suiteInfos['suite'] ?></option>
+                    <?php }
+                    ?>
                 </select>
                 <div id="suiteHelp" class="form-text text-danger d-none">Veuillez sélectionner une suite</div>
             </div>

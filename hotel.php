@@ -23,9 +23,8 @@ if(!isset($_GET['hotel']) && intval($_GET['hotel']) === 0){
     $count = $hotelReq->rowCount();
     if($count === 0){
         header('location:./index.php?error=invalidHotel');
-    } else {
-        require_once('./components/header/header-noauth.php'); ?>
-        <section class="row px-lg-5">
+    } else {?>
+        <section class="row px-lg-5 mt-5">
             <!-- présentation de l'hotel -->
             <div class="col-md-6 d-none d-md-block text-center align-self-center">
                 <img class="img-fluid" src="./assets/img/hypnos-hotel-flower.svg" alt="illustration, fleurs">
@@ -61,7 +60,11 @@ if(!isset($_GET['hotel']) && intval($_GET['hotel']) === 0){
                                 <div class="mb-3 px-0">
                                     <h4 class="card-title text-gold"><?= $suiteInfos['title'] ?></h4>
                                     <h6 class="card-subtitle mb-2 text-lgrey">à partir de <?= $suiteInfos['price'] ?> € la nuit</h6>
-                                    <p class="card-text py-2"><?= $suiteInfos['description'] ?></p>
+                                    <div class="d-md-none">
+                                        <p class="card__img" style="background-image: url('<?= $suiteInfos['primePicture'] ?>');"></p>
+                                        <!-- <img src="<?= $suiteInfos['primePicture'] ?>" class="img-fluid card__img" alt="photo suite"> -->
+                                    </div>
+                                    <p class="card-text pb-2 pb-md-0 py-md-2"><?= $suiteInfos['description'] ?></p>
                                 </div>
                                 <div class="text-center row px-2 d-flex justify-content-center justify-content-md-end">
                                     <?php 
@@ -75,7 +78,7 @@ if(!isset($_GET['hotel']) && intval($_GET['hotel']) === 0){
                                     <?php } else { ?>
                                         <button type="button" class="col-5 btn bg-offwhite border-gold rounded-pill text-dblue px-2 mx-2" data-bs-toggle="modal" data-bs-target="#suite<?= $suiteInfos['id'] ?>">galerie d'images</button>
                                     <?php } ?>
-                                    <a type="button" href="#" class="col-5 btn bg-gold rounded-pill text-offwhite px-2 mx-2">réserver</a>
+                                    <a type="button" href="./booking.php?suite=<?= $suiteInfos['id'] ?>" class="col-5 btn bg-gold rounded-pill text-offwhite px-2 mx-2">réserver</a>
                                 </div>
                             </div>
                         </div>

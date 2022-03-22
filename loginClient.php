@@ -13,8 +13,29 @@ if(isset($_SESSION['connect'])){
 } else {
     require_once('./components/header/header-noauth.php');
 }
+
+if(!empty($_GET['error']) && $_GET['error'] == 'signupfail'){ ?>
+    <div class="row py-2 text-center bg-danger">
+        <p class="text-white m-0">Une erreur est survenue lors de la création de votre compte. Merci de réessayer ultérieurement.</p>
+    </div>
+<?php }
+if(!empty($_GET['error']) && $_GET['error'] == 'email'){ ?>
+    <div class="row py-2 text-center bg-danger">
+        <p class="text-white m-0">Vous ne pouvez pas utiliser cette adresse email.</p>
+    </div>
+<?php }
+if(isset($_GET['error']) && $_GET['error'] == 'invalid'){ ?>
+    <div class="row py-2 text-center bg-danger">
+        <p class="text-white m-0">Identifiants invalides</p>
+    </div>
+<?php } 
+if(isset($_GET['signup']) && $_GET['signup'] == 'success'){ ?>
+    <div class="row py-2 text-center bg-success">
+        <p class="text-white m-0">Compte créé avec succès ! Connectez-vous !</p>
+    </div>
+<?php }
 ?>
-<section class="row px-lg-5" >
+<section class="row px-lg-5 mt-5" >
     <!-- illustration -->
     <div class="col-md-6 d-none d-md-block text-center align-self-center">
         <img class="img-fluid" src="./assets/img/hypnos-login.svg" alt="illustration, devices">
@@ -23,12 +44,6 @@ if(isset($_SESSION['connect'])){
     <div class="col-12 col-md-6" id="logInSection">
         <h2 class="text-tilered">Se connecter</h2>
         <p>Nouveau client ? <a href="#" id="signInLink">S'inscrire</a></p>
-        <?php 
-        if(isset($_GET['error']) && $_GET['error'] == 'invalid'){ ?>
-            <div class="row py-2 text-center bg-danger">
-                <p class="text-white m-0"> Identifiants invalides</p>
-            </div>
-        <?php } ?>
         <form action="" method="post" class="row" id="loginClientForm">
             <div class="mb-3 col-12">
                 <label for="emailLogIn" class="form-label text-gold">Email</label>
@@ -47,7 +62,6 @@ if(isset($_SESSION['connect'])){
     <!-- S'INSCRIRE -->
     <div class="col-12 col-md-6 d-none" id="signUpSection">
         <h2 class="text-tilered">S'inscrire</h2>
-        <!-- <p>Nouveau client ? <a href="#" id="signInLink">S'inscrire</a></p> -->
         <form action="" method="post" class="row" id="signUpForm">
             <div class="mb-3 col-12">
                 <label for="firstname" class="form-label text-gold">Prénom</label>
@@ -71,7 +85,7 @@ if(isset($_SESSION['connect'])){
                 <input type="password" class="form-control" id="passwordSignIn" name="passwordSignIn" required>
                 <div id="pwdSignHelp" class="form-text text-danger d-none">Votre mot de passe doit contenir entre 8 et 15 caractères, dont 1 maj., 1 min., 1 chiffre et 1 caractère spécial</div>
             </div>
-            <button type="submit" id="signUpBtn" class="btn bg-gold rounded-pill text-offwhite my-4 col-8 offset-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">Se connecter</button>
+            <button type="submit" id="signUpBtn" class="btn bg-gold rounded-pill text-offwhite my-4 col-8 offset-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">S'inscrire'</button>
         </form>
     </div>
 </section>

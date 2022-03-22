@@ -16,7 +16,7 @@
 </head>
 <body class="bg-offwhite">
     <main class="container-fluid d-flex flex-column justify-content-between">
-        <header class="row bg-dblue mb-5 p-3 d-flex justify-content-between">
+        <header class="row bg-dblue p-3 d-flex justify-content-between">
             <div class="col-lg-2 col my-auto">
                 <a href="./index.php"><img class="" src="./assets/img/hypnos-logo-gold.svg" alt="logo Hypnos"></a>
             </div>
@@ -62,7 +62,7 @@
                     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                         <div class="offcanvas-header bg-dblue">
                             <h5 class="offcanvas-title text-offwhite" id="offcanvasNavbarLabel">Hypnos Hotel Group</h5>
-                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            <button type="button" class="btn-close bg-offwhite text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
                         <div class="offcanvas-body bg-dblue">
                             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
