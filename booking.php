@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('./components/db/db.php');
+require_once('./components/bookingScript.php');
 if(isset($_SESSION['connect'])){
     if($_SESSION['connect'] == 'client'){
         require_once('./components/header/header-client.php');
@@ -12,6 +13,16 @@ if(isset($_SESSION['connect'])){
 } else {
     require_once('./components/header/header-noauth.php');
 }
+if(!empty($_GET['error']) && $_GET['error'] == 'invalid'){ ?>
+    <div class="row py-2 text-center bg-danger">
+        <p class="text-white m-0">Votre demande n'a pas été envoyée. Merci d'entrer des informations valides.</p>
+    </div>
+<?php }
+if(!empty($_GET['error']) && $_GET['error'] == 'connexion'){ ?>
+    <div class="row py-2 text-center bg-danger">
+        <p class="text-white m-0">Votre demande n'a pas été envoyée. Merci de vous connecter avant de réserver.</p>
+    </div>
+<?php }
 ?>
 <section class="row px-lg-5 mt-5" >
     <!-- présentation -->
@@ -29,7 +40,7 @@ if(isset($_SESSION['connect'])){
         <img class="img-fluid px-5" src="./assets/img/hypnos-section-ornament.svg" alt="ornement">
     </div>
 
-    <!-- NOUS CONTACTER -->
+    <!-- RESERVER -->
     <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
         <form action="" method="post" class="row" id="bookingForm">
             <div class="mb-3 col-12">
@@ -58,10 +69,42 @@ if(isset($_SESSION['connect'])){
                 <input type="date" class="form-control" id="endDate" name="endDate" required>
                 <div id="endDateHelp" class="form-text text-danger d-none">Veuillez entrer une date valide</div>
             </div>
-            
-            <button type="submit" id="bookingBtn" class="btn bg-gold rounded-pill text-offwhite my-4 col-8 offset-2 col-md-6 offset-md-3">Vérifier la disponibilité</button>
+            <div class="mb-3 col-12 d-none" id="available">
+                <h4 class="text-gold mb-3">Bonne nouvelle !</h4>
+                <p id="availability">La suite est disponible aux dates demandées. Il ne vous reste plus qu'à valider !</p>
+                <?php
+                if(empty($_SESSION['connect']) || (!empty($_SESSION['connect']) && $_SESSION['connect'] != 'client')){ ?>
+                    <p>Rappelez-vous : vous devez vous identifier avant de réserver ! C'est <a href="./loginClient.php">ici</a> !</p>
+                <?php }
+                ?>
+                <div class="row">
+                    <button type="submit" name="submit" class="btn bg-gold rounded-pill text-offwhite my-4 col-12 col-md-4 offset-md-4" >Valider</button>
+                </div>
+            </div>
+            <div class="mb-3 col-12 d-none" id="unavailable">
+                <h4 class="text-gold mb-3" >Oupsi...</h4>
+                <p >La suite n'est pas disponible aux dates demandées. Vous pouvez changer de suite, ou de dates !</p>
+            </div>
+            <button type="btn" id="bookingBtn" class="btn bg-gold rounded-pill text-offwhite my-4 col-8 offset-2 col-md-6 offset-md-3" >Vérifier la disponibilité</button>
         </form>
     </div>
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="showAvailability" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content d-flex flex-column justify-content-between">
+            <div class="modal-body pb-0">
+                <h4 class="text-gold mb-3" id="availabilityTitle"></h4>
+                <p id="availability"></p>
+            </div>
+            <div class="modal-footer border-0 pt-0">
+                <button type="button" class="btn border-gold bg-offwhite rounded-pill px-5" data-bs-dismiss="modal">annuler</button>
+                <button type="button" class="btn bg-gold text-offwhite rounded-pill px-5" id="bookingValidate">réserver</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
     
 </section>
 
@@ -69,8 +112,7 @@ if(isset($_SESSION['connect'])){
 require_once('./components/footer.php');
 ?>
 </main>
-<script src="./components/scripts/functions.js"></script>
-<script src="./components/scripts/contact.js"></script>
+<script src="./components/scripts/booking.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
