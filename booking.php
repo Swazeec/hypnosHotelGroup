@@ -88,24 +88,6 @@ if(!empty($_GET['error']) && $_GET['error'] == 'connexion'){ ?>
             <button type="btn" id="bookingBtn" class="btn bg-gold rounded-pill text-offwhite my-4 col-8 offset-2 col-md-6 offset-md-3" >Vérifier la disponibilité</button>
         </form>
     </div>
-
-<!-- Modal -->
-<!-- <div class="modal fade" id="showAvailability" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered ">
-        <div class="modal-content d-flex flex-column justify-content-between">
-            <div class="modal-body pb-0">
-                <h4 class="text-gold mb-3" id="availabilityTitle"></h4>
-                <p id="availability"></p>
-            </div>
-            <div class="modal-footer border-0 pt-0">
-                <button type="button" class="btn border-gold bg-offwhite rounded-pill px-5" data-bs-dismiss="modal">annuler</button>
-                <button type="button" class="btn bg-gold text-offwhite rounded-pill px-5" id="bookingValidate">réserver</button>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-    
 </section>
 
 <?php
