@@ -1,4 +1,50 @@
 <?php
+
+// AJOUT MANAGER
+if(isset($_POST['addManager'])){
+    if (!empty($_POST['newfirstname']) && 
+            !empty($_POST['newlastname']) && 
+            !empty($_POST['newemail']) && 
+            !empty($_POST['newpassword'])){
+    require_once('./components/functions.php');
+    // VARIABLES
+    $firstname = htmlspecialchars($_POST['newfirstname']);
+    $lastname = htmlspecialchars($_POST['newlastname']);
+    $email = htmlspecialchars($_POST['newemail']);
+    $password = htmlspecialchars($_POST['newpassword']);
+
+    // VERIFICATION SI EMAIL EXISTE DANS LA BDD
+    $managersReq = $bdd->prepare('SELECT * FROM managers WHERE email = :email');
+    $managersReq->bindValue(':email', $email);
+    $managersReq->execute();
+    $managerCount = $managersReq->rowCount();
+
+    // VERIFICATIONS
+    if(checkName($firstname) === false ||
+        checkName($lastname) === false ||
+        checkEmail($email) === false ||
+        checkPwd($password) === false){
+            header('location:./adminDashboard.php?error=addManager');
+        } else if ($managerCount !== 0){
+            header('location:./adminDashboard.php?error=emailManager');
+        } else {
+        // PWD ENCRYPT
+        $password = password_hash($password, PASSWORD_BCRYPT);
+        $newManager = $bdd->prepare('INSERT INTO managers (firstname, lastname, email, password) 
+                                    VALUES (:fn, :ln, :email, :pw);');
+        $newManager->bindValue(':fn', $firstname);
+        $newManager->bindValue(':ln', $lastname);
+        $newManager->bindValue(':email', $email);
+        $newManager->bindValue(':pw', $password);
+        $newManager->execute();
+        header('location:./adminDashboard.php?success=addManager');
+    }
+}
+}
+
+
+// MODIFICATION MANAGER
+
 if(isset($_POST['modifyManager'])){
     if(!empty($_POST['managerId']) &&
         !empty($_POST['firstname']) &&
@@ -27,9 +73,9 @@ if(isset($_POST['modifyManager'])){
         checkName($managerLastname) === false ||
         checkEmail($managerEmail) === false ||
         checkPwd($managerPassword) === false){
-            header('location:./adminDashboard.php?error=modifyManager1');
+            header('location:./adminDashboard.php?error=modifyManager');
         } else if ($managerCount === 0){
-            header('location:./adminDashboard.php?error=modifyManager2');
+            header('location:./adminDashboard.php?error=modifyManager');
         } else {
             // PWD ENCRYPT
             $password = password_hash($managerPassword, PASSWORD_BCRYPT);
@@ -49,7 +95,7 @@ if(isset($_POST['modifyManager'])){
     }
 
 }
-
+// SUPPRESSION MANAGER
 if(!empty($_GET['deleteManager'])){
     $managerId = htmlspecialchars($_GET['deleteManager']);
     $managerId = intval($managerId);

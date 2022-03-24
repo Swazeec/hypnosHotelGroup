@@ -26,6 +26,16 @@ if(!empty($_GET['error']) && $_GET['error'] == 'deleteManager'){ ?>
         <p class="text-white m-0">Une erreur est survenue lors de la suppression de votre manager. Merci de réessayer ultérieurement.</p>
     </div>
 <?php }
+if(!empty($_GET['error']) && $_GET['error'] == 'addManager'){ ?>
+    <div class="row py-2 text-center bg-danger">
+        <p class="text-white m-0">Une erreur est survenue lors de l'ajout de votre manager. Merci de vérifier vos informations.</p>
+    </div>
+<?php }
+if(!empty($_GET['error']) && $_GET['error'] == 'emailManager'){ ?>
+    <div class="row py-2 text-center bg-danger">
+        <p class="text-white m-0">Cette adresse email est déjà attribuée à un compte manager.</p>
+    </div>
+<?php }
 if(!empty($_GET['error']) && $_GET['error'] == 'activeManager'){ ?>
     <div class="row py-2 text-center bg-danger">
         <p class="text-white m-0">Vous ne pouvez pas supprimer ce manager, il gère actuellement un hôtel. Vous devez d'abord créer et / ou associer un nouveau manager à son hôtel !</p>
@@ -41,6 +51,11 @@ if(!empty($_GET['success']) && $_GET['success'] == 'deleteManager'){ ?>
         <p class="text-white m-0">Votre manager a été supprimé avec succès !</p>
     </div>
 <?php }
+if(!empty($_GET['success']) && $_GET['success'] == 'addManager'){ ?>
+    <div class="row py-2 text-center bg-success">
+        <p class="text-white m-0">Votre manager a été ajouté avec succès !</p>
+    </div>
+<?php }
 ?>
 <section class="row px-lg-5 mt-5">
     <div class="col-12 text-center mb-5">
@@ -54,14 +69,14 @@ if(!empty($_GET['success']) && $_GET['success'] == 'deleteManager'){ ?>
             <!-- LES MANAGERS -->
             <div class="col-12 col-lg-4 rounded bg-offwhite d-flex flex-column  mt-3" id="managers">
                 <h4 class="text-gold mb-3 align-self-center">Vos managers</h4>
-                <a href="#" class="border-gold text-dblue rounded-pill mx-5 p-1 text-center"><i class="bi bi-plus"></i> nouveau manager</a>
+                <a href="#" class="border-gold text-dblue rounded-pill mx-5 p-1 text-center" data-bs-toggle="modal" data-bs-target="#addManager"><i class="bi bi-plus"></i> nouveau manager</a>
                 <div class="mt-5 row">
                     <?php
                     $managersReq = $bdd->prepare('SELECT managers.*, hotels.name 
                                                 FROM managers
                                                 LEFT JOIN hotels ON hotels.manager_id = managers.id');
                     $managersReq->execute();
-                    
+
                     function hotel($value){
                         if($value !== null){
                             return ' - '.$value;
@@ -141,6 +156,45 @@ if(!empty($_GET['success']) && $_GET['success'] == 'deleteManager'){ ?>
                     
                     <?php }
                     ?>
+                </div>
+                <!-- Modal add manager -->
+                <div class="modal fade" id="addManager" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header border-0">
+                                <h5 class="modal-title text-gold" id="addManagerLabel">Ajouter un manager</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="post">
+                                    <div class="mb-3 col-12">
+                                        <label for="newfirstname" class="form-label text-gold">Prénom</label>
+                                        <input type="text" class="form-control" id="newfirstname" name="newfirstname" required>
+                                        <div id="newfirstnameHelp" class="form-text text-danger d-none">Veuillez entrer un prénom valide</div>
+                                    </div>
+                                    <div class="mb-3 col-12">
+                                        <label for="newlastname" class="form-label text-gold">Nom</label>
+                                        <input type="text" class="form-control" id="newlastname" name="newlastname" required>
+                                        <div id="newlastnameHelp" class="form-text text-danger d-none">Veuillez entrer un nom valide</div>
+                                    </div>
+                                    <div class="mb-3 col-12">
+                                        <label for="newemail" class="form-label text-gold">Email</label>
+                                        <input type="email" class="form-control" id="newemail" name="newemail" required>
+                                        <div id="newemailHelp" class="form-text text-danger d-none">Veuillez entrer une adresse valide</div>
+                                    </div>
+                                    <div class="mb-3 col-12">
+                                        <label for="newpassword" class="form-label text-gold">Mot de passe</label>
+                                        <input type="password" class="form-control" id="newpassword" name="newpassword" required>
+                                        <div id="newpwdHelp" class="form-text text-danger d-none">Votre mot de passe doit contenir entre 8 et 15 caractères, dont 1 maj., 1 min., 1 chiffre et 1 caractère spécial</div>
+                                    </div>
+                                    <div class=" d-flex px-md-5 ">
+                                        <button type="button" class="btn flex-fill me-1 bg-offwhite text-dblue border-gold rounded-pill" data-bs-dismiss="modal">annuler</button>
+                                        <button type="submit" id="addManagerBtn" name="addManager" class="btn flex-fill ms-1 bg-gold text-offwhite rounded-pill">ajouter</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
