@@ -107,3 +107,7 @@ footer {
     background-size: cover;
     background-position: bottom;
 }
+
+.regular {
+    font-weight: 400;
+}

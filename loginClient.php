@@ -85,7 +85,7 @@ if(isset($_GET['signup']) && $_GET['signup'] == 'success'){ ?>
                 <input type="password" class="form-control" id="passwordSignIn" name="passwordSignIn" required>
                 <div id="pwdSignHelp" class="form-text text-danger d-none">Votre mot de passe doit contenir entre 8 et 15 caractères, dont 1 maj., 1 min., 1 chiffre et 1 caractère spécial</div>
             </div>
-            <button type="submit" id="signUpBtn" class="btn bg-gold rounded-pill text-offwhite my-4 col-8 offset-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">S'inscrire'</button>
+            <button type="submit" id="signUpBtn" class="btn bg-gold rounded-pill text-offwhite my-4 col-8 offset-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">S'inscrire</button>
         </form>
     </div>
 </section>
