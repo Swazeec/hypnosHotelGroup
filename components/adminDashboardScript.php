@@ -257,3 +257,31 @@ if(!empty($_GET['deleteMessage'])){
         header('location:./adminDashboard.php?error=deleteMessage');
     }
 }
+
+// MODIFICATION STATUT MESSAGE
+if(!empty($_GET['modifyMessage'])){
+    $messageId = htmlspecialchars($_GET['modifyMessage']);
+    $messageId = intval($messageId);
+    if($messageId && $messageId > 0){
+        $messageReq = $bdd->prepare('SELECT * FROM contactRequests WHERE id = :id ;');
+        $messageReq->bindValue(':id', $messageId, PDO::PARAM_INT);
+        $messageReq->execute();
+        $messageCount = $messageReq->rowCount();
+        if($messageCount === 1){
+            $messageInfos = $messageReq->fetch(PDO::FETCH_ASSOC);
+            $modifyMessage = $bdd->prepare('UPDATE contactRequests SET requestStatus_id = :rsid WHERE id = :id ;');
+            $modifyMessage->bindValue(':id', $messageId, PDO::PARAM_INT);
+            if($messageInfos['requestStatus_id'] == 1){
+                $modifyMessage->bindValue(':rsid', 2, PDO::PARAM_INT);
+            } else {
+                $modifyMessage->bindValue(':rsid', 1, PDO::PARAM_INT);
+            }
+            $modifyMessage->execute();
+            header('location:./adminDashboard.php?success=modifyMessage');
+        } else {
+            header('location:./adminDashboard.php?error=modifyMessage');
+        }
+    } else {
+        header('location:./adminDashboard.php?error=modifyMessage');
+    }
+}

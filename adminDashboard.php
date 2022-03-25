@@ -303,6 +303,7 @@ if(!empty($_GET['success']) && $_GET['success'] == 'addHotel'){ ?>
             <div class="col-12 col-lg-4 rounded bg-offwhite d-flex flex-column mt-3" id="messages">
                 <h4 class="text-gold mb-3 align-self-center">Vos messages</h4>
                 <?php 
+                $bdd->query('SET lc_time_names = \'fr_FR\'');
                 $newMessages = $bdd->prepare('SELECT * FROM contactRequests WHERE requestStatus_id = 1');
                 $newMessages->execute();
                 $newMessagesCount = $newMessages->rowCount();
@@ -316,7 +317,15 @@ if(!empty($_GET['success']) && $_GET['success'] == 'addHotel'){ ?>
                 ?>
                 <div class="mt-5 row">
                 <?php
-                    $contactsReq = $bdd->prepare('SELECT contactRequests.*, topics.name 
+                    $contactsReq = $bdd->prepare('SELECT contactRequests.id,
+                                                        contactRequests.firstname,
+                                                        contactRequests.lastname,
+                                                        contactRequests.email,
+                                                        contactRequests.message,
+                                                        contactRequests.client_id,
+                                                        contactRequests.requestStatus_id,
+                                                        DATE_FORMAT(contactRequests.requestDate, "%d/%m/%Y") AS requestDate,
+                                                        topics.name 
                                                 FROM contactRequests
                                                 JOIN topics ON topics.id = contactRequests.topic_id
                                                 ORDER BY requestDate DESC');
@@ -325,13 +334,13 @@ if(!empty($_GET['success']) && $_GET['success'] == 'addHotel'){ ?>
                         if($message['requestStatus_id'] == 1){ ?>
                             <p class="col-8 col-sm-9  regular text-gold"><?= $message['firstname'].' '. $message['lastname'].' - '.$message['name'] ?></p>
                             <div class="col-4 col-sm-3 text-end">
-                                <a class="px-2" href="#"><i class="bi bi-envelope text-primary"></i></a>
+                                <a class="px-2" href="#" data-bs-toggle="modal" data-bs-target="#readMessage<?= $message['id']?>"><i class="bi bi-envelope text-primary"></i></a>
                                 <a class="px-2" href="#" data-bs-toggle="modal" data-bs-target="#deleteMessage<?= $message['id']?>"><i class="bi bi-x-lg text-danger"></i></a>
                             </div>
                         <?php } else { ?>
                             <p class="col-8 col-sm-9"><?= $message['firstname'].' '. $message['lastname'].' - '.$message['name'] ?></p>
                             <div class="col-4 col-sm-3 text-end">
-                                <a class="px-2" href="#"><i class="bi bi-envelope-open text-grey"></i></a>
+                                <a class="px-2" href="#" data-bs-toggle="modal" data-bs-target="#readMessage<?= $message['id']?>"><i class="bi bi-envelope-open text-grey"></i></a>
                                 <a class="px-2" href="#" data-bs-toggle="modal" data-bs-target="#deleteMessage<?= $message['id']?>"><i class="bi bi-x-lg text-danger"></i></a>
                             </div>
                         <?php } ?>
@@ -353,12 +362,52 @@ if(!empty($_GET['success']) && $_GET['success'] == 'addHotel'){ ?>
                                 </div>
                             </div>
                         </div>
-                    <?php }
+                        <!-- Modal LIRE message -->
+                        <div class="modal fade" id="readMessage<?= $message['id']?>" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header border-0">
+                                        <div class="modal-title">
+                                            <h5 class="text-gold">Message de <?= $message['firstname'].' '.$message['lastname']?></h5>
+                                            <?php
+                                            if ($message['client_id'] !== null){ ?>
+                                                <h6> (Client)</h6>
+                                            <?php } else { ?>
+                                                <h6> (Visiteur)</h6>
+                                            <?php } ?>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body py-0">
+                                        <p>Reçu le : <?= $message['requestDate']?></p>
+                                        <h6>Sujet : "<?= $message['name']?>"</h6>
+                                        <p>Email : <?= $message['email']?></p>
+                                        <p>Message : <?= $message['message']?></p>
+                                    </div>
+                                    <?php 
+                                    if($message['requestStatus_id'] === 1){ ?>
+                                    <!-- message non lu -> le passer en lu -->
+                                        <div class="modal-footer border-0 d-flex px-md-5 ">
+                                            <a class="btn flex-fill me-1 bg-offwhite text-dblue border-gold rounded-pill" data-bs-dismiss="modal">annuler</a>
+                                            <a href="./adminDashboard.php?modifyMessage=<?= $message['id']?>" class="btn flex-fill ms-1 bg-gold text-offwhite rounded-pill">marquer comme lu</a>
+                                        </div>
+                                    <?php } else { ?>
+                                    <!-- message déjà lu -> le passer en non-lu -->
+                                        <div class="modal-footer border-0 d-flex px-md-5 ">
+                                            <a class="btn flex-fill me-1 bg-offwhite text-dblue border-gold rounded-pill" data-bs-dismiss="modal">annuler</a>
+                                            <a href="./adminDashboard.php?modifyMessage=<?= $message['id']?>" class="btn flex-fill ms-1 bg-gold text-offwhite rounded-pill">marquer comme non-lu</a>
+                                        </div>
+                                    <?php }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } 
                     ?>
                 </div>
             </div>
 
-
+                                            
 
 
         </div>
