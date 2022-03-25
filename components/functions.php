@@ -24,3 +24,12 @@ function checkPwd($value){
         return true;
     }
 }
+
+function checkAddress($value){
+    $rgxAdd = '/^[0-9a-zA-ZÀ-ž \-\']+$/';
+    if(strlen($value) > 100 || !preg_match($rgxAdd, $value)){
+        return false;
+    } else {
+        return true;
+    }
+}

@@ -15,10 +15,19 @@ if(isset($_SESSION['connect'])){
 } else {
     header('location:./index.php'); 
 }
-
+if(!empty($_GET['modify']) && $_GET['modify'] == 'invalid'){ ?>
+    <div class="row py-2 text-center bg-danger">
+        <p class="text-white m-0">Une erreur est survenue lors de la demande de modification. Merci de réessayer ultérieurement.</p>
+    </div>
+<?php }
 if(!empty($_GET['error']) && $_GET['error'] == 'modifyManager'){ ?>
     <div class="row py-2 text-center bg-danger">
         <p class="text-white m-0">Une erreur est survenue lors de la modification de votre manager. Merci de réessayer ultérieurement.</p>
+    </div>
+<?php }
+if(!empty($_GET['error']) && $_GET['error'] == 'modifyHotel'){ ?>
+    <div class="row py-2 text-center bg-danger">
+        <p class="text-white m-0">Une erreur est survenue lors de la modification de votre hôtel. Merci de réessayer ultérieurement.</p>
     </div>
 <?php }
 if(!empty($_GET['error']) && $_GET['error'] == 'deleteManager'){ ?>
@@ -26,9 +35,24 @@ if(!empty($_GET['error']) && $_GET['error'] == 'deleteManager'){ ?>
         <p class="text-white m-0">Une erreur est survenue lors de la suppression de votre manager. Merci de réessayer ultérieurement.</p>
     </div>
 <?php }
+if(!empty($_GET['error']) && $_GET['error'] == 'deleteHotel'){ ?>
+    <div class="row py-2 text-center bg-danger">
+        <p class="text-white m-0">Une erreur est survenue lors de la suppression de votre hôtel. Merci de réessayer ultérieurement.</p>
+    </div>
+<?php }
+if(!empty($_GET['error']) && $_GET['error'] == 'deleteMessage'){ ?>
+    <div class="row py-2 text-center bg-danger">
+        <p class="text-white m-0">Une erreur est survenue lors de la suppression de votre message. Merci de réessayer ultérieurement.</p>
+    </div>
+<?php }
 if(!empty($_GET['error']) && $_GET['error'] == 'addManager'){ ?>
     <div class="row py-2 text-center bg-danger">
         <p class="text-white m-0">Une erreur est survenue lors de l'ajout de votre manager. Merci de vérifier vos informations.</p>
+    </div>
+<?php }
+if(!empty($_GET['error']) && $_GET['error'] == 'addHotel'){ ?>
+    <div class="row py-2 text-center bg-danger">
+        <p class="text-white m-0">Une erreur est survenue lors de l'ajout de votre hôtel. Merci de vérifier vos informations.</p>
     </div>
 <?php }
 if(!empty($_GET['error']) && $_GET['error'] == 'emailManager'){ ?>
@@ -46,14 +70,34 @@ if(!empty($_GET['success']) && $_GET['success'] == 'modifyManager'){ ?>
         <p class="text-white m-0">Votre manager a été modifié avec succès !</p>
     </div>
 <?php }
+if(!empty($_GET['success']) && $_GET['success'] == 'modifyHotel'){ ?>
+    <div class="row py-2 text-center bg-success">
+        <p class="text-white m-0">Votre hôtel a été modifié avec succès !</p>
+    </div>
+<?php }
 if(!empty($_GET['success']) && $_GET['success'] == 'deleteManager'){ ?>
     <div class="row py-2 text-center bg-success">
         <p class="text-white m-0">Votre manager a été supprimé avec succès !</p>
     </div>
 <?php }
+if(!empty($_GET['success']) && $_GET['success'] == 'deleteHotel'){ ?>
+    <div class="row py-2 text-center bg-success">
+        <p class="text-white m-0">Votre hôtel, ses suites et réservations ont été supprimés avec succès !</p>
+    </div>
+<?php }
+if(!empty($_GET['success']) && $_GET['success'] == 'deleteMessage'){ ?>
+    <div class="row py-2 text-center bg-success">
+        <p class="text-white m-0">Votre message a été supprimé avec succès !</p>
+    </div>
+<?php }
 if(!empty($_GET['success']) && $_GET['success'] == 'addManager'){ ?>
     <div class="row py-2 text-center bg-success">
         <p class="text-white m-0">Votre manager a été ajouté avec succès !</p>
+    </div>
+<?php }
+if(!empty($_GET['success']) && $_GET['success'] == 'addHotel'){ ?>
+    <div class="row py-2 text-center bg-success">
+        <p class="text-white m-0">Votre hôtel a été ajouté avec succès !</p>
     </div>
 <?php }
 ?>
@@ -85,52 +129,12 @@ if(!empty($_GET['success']) && $_GET['success'] == 'addManager'){ ?>
                     while($manager = $managersReq->fetch(PDO::FETCH_ASSOC)){ ?>
                         <p class="col-8 col-sm-9"><?= $manager['firstname'].' '. $manager['lastname']. hotel($manager['name']) ?></p>
                         <div class="col-4 col-sm-3 text-end">
-                            <a class="px-2 btn" data-bs-toggle="modal" data-bs-target="#modifyManager<?= $manager['id']?>"><i class="bi bi-pencil text-primary"></i></a>
+                            <a class="px-2 btn" href="./modifyManager.php?manager=<?= $manager['id']?>" ><i class="bi bi-pencil text-primary"></i></a>
                             <a class="px-2 btn" data-bs-toggle="modal" data-bs-target="#deleteManager<?= $manager['id']?>"><i class="bi bi-x-lg text-danger"></i></a>
                         </div>                        
 
-                        <!-- Modal modif manager -->
-                        <div class="modal fade" id="modifyManager<?= $manager['id']?>" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header border-0">
-                                        <h5 class="modal-title text-gold" id="manager<?= $manager['id']?>Label"><?= $manager['firstname'].' '. $manager['lastname']. ' - '.$manager['name'] ?></h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="" method="post">
-                                            <input class="d-none" name="managerId" value="<?= $manager['id'] ?>"></input>
-                                            <div class="mb-3 col-12">
-                                                <label for="firstname" class="form-label text-gold">Prénom</label>
-                                                <input type="text" class="form-control" id="firstname" name="firstname" value="<?= $manager['firstname'] ?>" required>
-                                                <div id="firstnameHelp" class="form-text text-danger d-none">Veuillez entrer un prénom valide</div>
-                                            </div>
-                                            <div class="mb-3 col-12">
-                                                <label for="lastname" class="form-label text-gold">Nom</label>
-                                                <input type="text" class="form-control" id="lastname" name="lastname" value="<?= $manager['lastname'] ?>" required>
-                                                <div id="lastnameHelp" class="form-text text-danger d-none">Veuillez entrer un nom valide</div>
-                                            </div>
-                                            <div class="mb-3 col-12">
-                                                <label for="email" class="form-label text-gold">Email</label>
-                                                <input type="email" class="form-control" id="email" name="email" value="<?= $manager['email'] ?>" required>
-                                                <div id="emailHelp" class="form-text text-danger d-none">Veuillez entrer une adresse valide</div>
-                                            </div>
-                                            <div class="mb-3 col-12">
-                                                <label for="password" class="form-label text-gold">Mot de passe</label>
-                                                <input type="password" class="form-control" id="password" name="password" value="" required>
-                                                <div id="pwdHelp" class="form-text text-danger d-none">Votre mot de passe doit contenir entre 8 et 15 caractères, dont 1 maj., 1 min., 1 chiffre et 1 caractère spécial</div>
-                                            </div>
-                                            <div class="modal-body d-flex px-md-5 ">
-                                                <button type="button" class="btn flex-fill me-1 bg-offwhite text-dblue border-gold rounded-pill" data-bs-dismiss="modal">annuler</button>
-                                                <button type="submit" id="modifyManager" name="modifyManager" class="btn flex-fill ms-1 bg-gold text-offwhite rounded-pill">modifier</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Modal supprimer manager -->
+                    <!-- Modal supprimer manager -->
                         <div class="modal fade" id="deleteManager<?= $manager['id']?>" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
@@ -145,15 +149,6 @@ if(!empty($_GET['success']) && $_GET['success'] == 'addManager'){ ?>
                                     </div>
                                 </div>
                             </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
                     <?php }
                     ?>
                 </div>
@@ -201,23 +196,109 @@ if(!empty($_GET['success']) && $_GET['success'] == 'addManager'){ ?>
             <!-- LES HOTELS -->
             <div class="col-12 col-lg-4 rounded bg-offwhite d-flex flex-column mt-3" id="hotels">
                 <h4 class="text-gold mb-3 align-self-center">Vos hôtels</h4>
-                <a href="#" class="border-gold text-dblue rounded-pill mx-5 p-1 text-center"><i class="bi bi-plus"></i> nouvel hôtel</a>
+                <a href="#" class="border-gold text-dblue rounded-pill mx-5 p-1 text-center" data-bs-toggle="modal" data-bs-target="#addHotel"><i class="bi bi-plus"></i> nouvel hôtel</a>
                 <div class="mt-5 row">
                 <?php
-                    $hotelsReq = $bdd->prepare('SELECT * 
-                                                FROM hotels');
+                    $hotelsReq = $bdd->prepare('SELECT hotels.*, managers.firstname, managers.lastname
+                                                FROM hotels
+                                                JOIN managers ON managers.id = hotels.manager_id ');
                     $hotelsReq->execute();
                     while($hotel = $hotelsReq->fetch(PDO::FETCH_ASSOC)){ ?>
                         <p class="col-8 col-sm-9"><?= $hotel['name'].' - '. $hotel['city'] ?></p>
                         <div class="col-4 col-sm-3 text-end">
-                            <a class="px-2" href="./adminDashboard.php?modify=hotel<?= $hotel['id']?>"><i class="bi bi-pencil text-primary"></i></a>
-                            <a class="px-2" href="./adminDashboard.php?delete=hotel<?= $hotel['id']?>"><i class="bi bi-x-lg text-danger"></i></a>
+                            <a class="px-2" href="./modifyHotel.php?hotel=<?= $hotel['id']?>"><i class="bi bi-pencil text-primary"></i></a>
+                            <a class="px-2" href="#" data-bs-toggle="modal" data-bs-target="#deleteHotel<?= $hotel['id']?>"><i class="bi bi-x-lg text-danger"></i></a>
                         </div>
+                        <!-- Modal supprimer hotel -->
+                        <div class="modal fade" id="deleteHotel<?= $hotel['id']?>" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header border-0">
+                                        <div class="modal-title">
+                                            <h5 class="text-gold" id="manager<?= $hotel['id']?>Label">Êtes-vous sûr de vouloir supprimer l'<?= $hotel['name'] ?> ?</h5>
+                                            <p class="text-danger"><i class="bi bi-exclamation-circle-fill text-danger"></i> ATTENTION !!! <br>Cela entrainera la suppression de toutes ses chambres et des réservations passées.</p>
+
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body d-flex px-md-5 ">
+                                        <a class="btn flex-fill me-1 bg-offwhite text-dblue border-gold rounded-pill" data-bs-dismiss="modal">annuler</a>
+                                        <a href="./adminDashboard.php?deleteHotel=<?= $hotel['id']?>" class="btn flex-fill ms-1 bg-gold text-offwhite rounded-pill">supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                     <?php }
                     ?>
                 </div>
+
+                <!-- MODAL ADD HOTEL -->
+                <div class="modal fade" id="addHotel" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header border-0">
+                                <h5 class="modal-title text-gold" id="addHotelLabel">Ajouter un hôtel</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="post">
+                                    <div class="mb-3 col-12">
+                                        <label for="hotelName" class="form-label text-gold">Nom</label>
+                                        <input type="text" class="form-control" id="hotelName" name="hotelName" required>
+                                        <div id="hotelNameHelp" class="form-text text-danger d-none">Veuillez entrer un nom valide</div>
+                                    </div>
+                                    <div class="mb-3 col-12">
+                                        <label for="address" class="form-label text-gold">Adresse</label>
+                                        <input type="text" class="form-control" id="address" name="address" required>
+                                        <div id="addressHelp" class="form-text text-danger d-none">Veuillez entrer une adresse valide</div>
+                                    </div>
+                                    <div class="mb-3 col-12">
+                                        <label for="city" class="form-label text-gold">Ville</label>
+                                        <input type="text" class="form-control" id="city" name="city" required>
+                                        <div id="cityHelp" class="form-text text-danger d-none">Veuillez entrer un nom valide</div>
+                                    </div>
+                                    <div class="mb-3 col-12">
+                                        <label for="description" class="form-label text-gold">Description</label>
+                                        <textarea class="form-control" id="description" name="description" required></textarea>
+                                        <div id="descriptionHelp" class="form-text text-danger d-none">Votre description peut contenir jusqu'à xxxx caractères</div>
+                                    </div>
+                                    <div class="mb-5 col-12">
+                                        <label for="hotelManager" class="form-label text-gold">Manager</label>
+                                        <?php
+                                        // MANAGERS N'ETANT PAS ENCORE ASSIGNES A UN HOTEL :
+                                        $availManagers = $bdd->prepare('SELECT * FROM managers
+                                                                        WHERE id NOT IN (SELECT manager_id FROM hotels)');
+                                        $availManagers->execute();
+                                        $availManagersCount = $availManagers->rowCount();
+                                        if($availManagersCount === 0){ ?>
+                                            <p>Merci d'ajouter un manager à votre équipe au préalable</p>
+                                        <?php } else { ?>
+                                            <select class="form-select" id="hotelManager" name="hotelManager" required>
+                                            <?php
+                                            while($availManager = $availManagers->fetch(PDO::FETCH_ASSOC)){ ?>
+                                                <option value="<?= $availManager['id'] ?>"><?= $availManager['firstname'].' '. $availManager['lastname']  ?></option>
+                                            <?php } ?>
+                                            </select>
+                                            <div id="hotelManagerHelp" class="form-text text-danger d-none">Veuillez sélectionner un manager valide</div>
+                                        <?php } ?>
+                                    </div>
+                                    <div class=" d-flex px-md-5 ">
+                                        <button type="button" class="btn flex-fill me-1 bg-offwhite text-dblue border-gold rounded-pill" data-bs-dismiss="modal">annuler</button>
+                                        <?php
+                                        if($availManagersCount !== 0){ ?>
+                                            <button type="submit" id="addHotelBtn" name="addHotel" class="btn flex-fill ms-1 bg-gold text-offwhite rounded-pill">ajouter</button>
+                                        <?php } ?>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
+             
+        
             <!-- LES MESSAGES -->
             <div class="col-12 col-lg-4 rounded bg-offwhite d-flex flex-column mt-3" id="messages">
                 <h4 class="text-gold mb-3 align-self-center">Vos messages</h4>
@@ -235,7 +316,7 @@ if(!empty($_GET['success']) && $_GET['success'] == 'addManager'){ ?>
                 ?>
                 <div class="mt-5 row">
                 <?php
-                    $contactsReq = $bdd->prepare('SELECT * 
+                    $contactsReq = $bdd->prepare('SELECT contactRequests.*, topics.name 
                                                 FROM contactRequests
                                                 JOIN topics ON topics.id = contactRequests.topic_id
                                                 ORDER BY requestDate DESC');
@@ -245,16 +326,33 @@ if(!empty($_GET['success']) && $_GET['success'] == 'addManager'){ ?>
                             <p class="col-8 col-sm-9  regular text-gold"><?= $message['firstname'].' '. $message['lastname'].' - '.$message['name'] ?></p>
                             <div class="col-4 col-sm-3 text-end">
                                 <a class="px-2" href="#"><i class="bi bi-envelope text-primary"></i></a>
-                                <a class="px-2" href="./adminDashboard.php?delete=message<?= $message['id']?>"><i class="bi bi-x-lg text-danger"></i></a>
+                                <a class="px-2" href="#" data-bs-toggle="modal" data-bs-target="#deleteMessage<?= $message['id']?>"><i class="bi bi-x-lg text-danger"></i></a>
                             </div>
                         <?php } else { ?>
                             <p class="col-8 col-sm-9"><?= $message['firstname'].' '. $message['lastname'].' - '.$message['name'] ?></p>
                             <div class="col-4 col-sm-3 text-end">
                                 <a class="px-2" href="#"><i class="bi bi-envelope-open text-grey"></i></a>
-                                <a class="px-2" href="./adminDashboard.php?delete=message<?= $message['id']?>"><i class="bi bi-x-lg text-danger"></i></a>
+                                <a class="px-2" href="#" data-bs-toggle="modal" data-bs-target="#deleteMessage<?= $message['id']?>"><i class="bi bi-x-lg text-danger"></i></a>
                             </div>
-                        <?php }
-                            ?>
+                        <?php } ?>
+
+                            <!-- Modal supprimer message -->
+                        <div class="modal fade" id="deleteMessage<?= $message['id']?>" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header border-0">
+                                        <div class="modal-title">
+                                            <h5 class="text-gold" >Êtes-vous sûr de vouloir supprimer ce message ?</h5>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body d-flex px-md-5 ">
+                                        <a class="btn flex-fill me-1 bg-offwhite text-dblue border-gold rounded-pill" data-bs-dismiss="modal">annuler</a>
+                                        <a href="./adminDashboard.php?deleteMessage=<?= $message['id']?>" class="btn flex-fill ms-1 bg-gold text-offwhite rounded-pill">supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <?php }
                     ?>
                 </div>

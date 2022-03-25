@@ -28,6 +28,12 @@ function checkTopic(value){
     }
     return true
 }
+function checkId(value){
+    if(value == '' || isNaN(value)){
+        return false
+    }
+    return true
+}
 
 function checkMessage(value){
     if(value.length == 0 || value.length > 2000){
@@ -36,4 +42,12 @@ function checkMessage(value){
     return true
 }
 
-module.exports =  {checkName, checkEmail, checkPwd, checkTopic, checkMessage}
+function checkAddress(value){
+    let AddRgx = /^[0-9a-zA-ZÀ-ž \-\']+$/
+    if(!AddRgx.test(value) || value.length < 2 || value === true  || value > 100){
+        return false
+    }
+    return true
+}
+
+// module.exports =  {checkName, checkEmail, checkPwd, checkTopic, checkMessage, checkId, checkAddress}

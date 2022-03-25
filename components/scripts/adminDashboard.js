@@ -100,3 +100,117 @@ addManagerBtn.addEventListener('click', (e)=>{
         error = 0
     } 
 })
+
+// AJOUT HOTEL
+
+let hotelName = document.getElementById('hotelName')
+let hotelNameHelp = document.getElementById('hotelNameHelp')
+
+let address = document.getElementById('address')
+let addressHelp = document.getElementById('addressHelp')
+
+let city = document.getElementById('city')
+let cityHelp = document.getElementById('cityHelp')
+
+let description = document.getElementById('description')
+let descriptionHelp = document.getElementById('descriptionHelp')
+
+let hotelManager = document.getElementById('hotelManager')
+let hotelManagerHelp = document.getElementById('hotelManagerHelp')
+
+let addHotelBtn = document.getElementById('addHotelBtn')
+
+addHotelBtn.addEventListener('click', (ev)=>{
+    if(checkName(hotelName.value) === false){
+        hotelNameHelp.classList.remove('d-none')
+        error += 1
+    }else {
+        hotelNameHelp.classList.add('d-none')
+    } 
+    if(checkAddress(address.value) === false){
+        addressHelp.classList.remove('d-none')
+        error += 1
+    }else {
+        addressHelp.classList.add('d-none')
+    }
+    if(checkName(city.value) === false){
+        cityHelp.classList.remove('d-none')
+        error += 1
+    }else {
+        cityHelp.classList.add('d-none')
+    } 
+    if(checkMessage(description.value) === false){
+        descriptionHelp.classList.remove('d-none')
+        error += 1
+    }else {
+        descriptionHelp.classList.add('d-none')
+    }
+    if(checkId(hotelManager.value) === false){
+        hotelManagerHelp.classList.remove('d-none')
+        error += 1
+    }else {
+        hotelManagerHelp.classList.add('d-none')
+    }
+    if(error != 0){
+        ev.preventDefault()
+        error = 0
+    }
+})
+
+// MODIFICATION HOTEL
+
+// let newhotelName = document.getElementById('newhotelName')
+// let newhotelNameHelp = document.getElementById('newhotelNameHelp')
+
+// let newaddress = document.getElementById('newaddress')
+// let newaddressHelp = document.getElementById('newaddressHelp')
+
+// let newcity = document.getElementById('newcity')
+// let newcityHelp = document.getElementById('newcityHelp')
+
+// let newdescription = document.getElementById('newdescription')
+// let newdescriptionHelp = document.getElementById('newdescriptionHelp')
+
+// let newhotelManager = document.getElementById('newhotelManager')
+// let newhotelManagerHelp = document.getElementById('newhotelManagerHelp')
+
+// let modifyHotelBtn = document.getElementById('modifyHotelBtn')
+
+
+// modifyHotelBtn.addEventListener('click', (e)=>{
+
+//     if(checkName(newhotelName.value) === false){
+//         newhotelNameHelp.classList.remove('d-none')
+//         error += 1
+//     }else {
+//         newhotelNameHelp.classList.add('d-none')
+//     } 
+//     if(checkAddress(newaddress.value) === false){
+//         newaddressHelp.classList.remove('d-none')
+//         error += 1
+//     }else {
+//         newaddressHelp.classList.add('d-none')
+//     }
+//     if(checkName(newcity.value) === false){
+//         newcityHelp.classList.remove('d-none')
+//         error += 1
+//     }else {
+//         newcityHelp.classList.add('d-none')
+//     } 
+//     if(checkMessage(newdescription.value) === false){
+//         newdescriptionHelp.classList.remove('d-none')
+//         error += 1
+//     }else {
+//         newdescriptionHelp.classList.add('d-none')
+//     }
+//     if(checkId(newhotelManager.value) === false){
+//         newhotelManagerHelp.classList.remove('d-none')
+//         error += 1
+//     }else {
+//         newhotelManagerHelp.classList.add('d-none')
+//     }
+//     if(error != 0){
+//         e.preventDefault()
+//         error = 0
+//     }
+// })
