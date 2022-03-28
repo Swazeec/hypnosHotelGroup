@@ -77,7 +77,7 @@ if(!isset($_GET['hotel'])){
                     <div id="newhotelManagerHelp" class="form-text text-danger d-none">Veuillez sélectionner un manager valide</div>
                 </div>
                 <div class=" d-flex px-md-5 ">
-                    <button type="button" class="btn flex-fill me-1 bg-offwhite text-dblue border-gold rounded-pill" data-bs-dismiss="modal">annuler</button>
+                    <a href="./adminDashboard.php" type="button" class="btn flex-fill me-1 bg-offwhite text-dblue border-gold rounded-pill" >annuler</a>
                     <button type="submit" id="modifyHotelBtn" name="modifyHotel" class="btn flex-fill ms-1 bg-gold text-offwhite rounded-pill">modifier</button>
                 </div>
             </form>
