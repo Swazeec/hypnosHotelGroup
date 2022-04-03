@@ -261,7 +261,7 @@ if(!empty($_GET['success']) && $_GET['success'] == 'addHotel'){ ?>
                                     <div class="mb-3 col-12">
                                         <label for="description" class="form-label text-gold">Description</label>
                                         <textarea class="form-control" id="description" name="description" required></textarea>
-                                        <div id="descriptionHelp" class="form-text text-danger d-none">Votre description peut contenir jusqu'à xxxx caractères</div>
+                                        <div id="descriptionHelp" class="form-text text-danger d-none">Votre description peut contenir jusqu'à 2000 caractères</div>
                                     </div>
                                     <div class="mb-5 col-12">
                                         <label for="hotelManager" class="form-label text-gold">Manager</label>

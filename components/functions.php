@@ -33,3 +33,30 @@ function checkAddress($value){
         return true;
     }
 }
+
+function checkPicture($value){
+    $extensions = ['jpg', 'jpeg'];
+    $fileInfo = pathinfo($value['name']);
+    if($value['error'] || $value['size'] > 500000 || !in_array($fileInfo['extension'], $extensions)){
+        return false;
+    }
+    return true;
+}
+
+function checkPictures($value){
+    $extensions = ['jpg', 'jpeg'];
+    for($i = 0; $i < count($value['name']); $i++){
+        $fileInfo = pathinfo($value['name'][$i]);
+        if($value['error'][$i] || $value['size'][$i] > 500000 || !in_array($fileInfo['extension'], $extensions)){
+            return false;
+        }
+    }
+    return true;
+}
+
+function checkURL($value){
+    if(!filter_var($value, FILTER_VALIDATE_URL)){
+        return false;
+    }
+    return true;
+}

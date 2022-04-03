@@ -99,21 +99,31 @@ if(!isset($_GET['hotel']) && intval($_GET['hotel']) === 0){
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <div id="carouselIndicators" class="carousel slide" data-bs-ride="carousel">
+                                    <div id="carouselIndicators<?= $suiteInfos['id'] ?>" class="carousel slide" data-bs-ride="carousel">
                                         <div class="carousel-inner">
                                             <?php 
-                                            while($picture = $picturesReq->fetch(PDO::FETCH_ASSOC)){ ?>
-                                                <div class="carousel-item active">
-                                                    <img src="<?= $picture['picture'] ?>" class="d-block w-100" alt="...">
-                                                </div>
-                                            <?php }
+                                            $pictures = $picturesReq->fetchAll(PDO::FETCH_ASSOC);
+                                            for($i = 0; $i < count($pictures) ; $i++){
+                                                if($i == 0){ ?>
+                                                    <div class="carousel-item active">
+                                                        <img src="<?= $pictures[$i]['picture'] ?>" class="d-block w-100" alt="...">
+                                                    </div>
+                                                <?php } else { ?>
+                                                    <div class="carousel-item">
+                                                        <img src="<?= $pictures[$i]['picture'] ?>" class="d-block w-100" alt="...">
+                                                    </div>
+                                                <?php 
+
+                                                }
+
+                                            }
                                             ?>
                                         </div>
-                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators" data-bs-slide="prev">
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators<?= $suiteInfos['id'] ?>" data-bs-slide="prev">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                             <span class="visually-hidden">Previous</span>
                                         </button>
-                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicators" data-bs-slide="next">
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicators<?= $suiteInfos['id'] ?>" data-bs-slide="next">
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                             <span class="visually-hidden">Next</span>
                                         </button>

@@ -42,9 +42,24 @@ function checkMessage(value){
     return true
 }
 
+function checkPicture(value){
+    if(value.size > 500000 || value.type !== 'image/jpeg'){
+        return false
+    } 
+    return true
+}
+
 function checkAddress(value){
     let AddRgx = /^[0-9a-zA-ZÀ-ž \-\']+$/
     if(!AddRgx.test(value) || value.length < 2 || value === true  || value > 100){
+        return false
+    }
+    return true
+}
+
+function checkURL(value){
+    let urlRgx = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+    if(!urlRgx.test(value) || value === true){
         return false
     }
     return true
