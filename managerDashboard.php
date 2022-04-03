@@ -4,6 +4,7 @@ require_once('./components/db/db.php');
 if(isset($_SESSION['connect'])){
     if($_SESSION['connect'] == 'pro' ){
         if($_SESSION['role'] == 'manager' ){
+            require_once('./components/managerDashboardScript.php');
             require_once('./components/header/header-pro.php');
         } else if($_SESSION['role'] == 'admin' ){
             header('location:./adminDashboard.php');
@@ -19,9 +20,19 @@ if(!empty($_GET['error']) && $_GET['error'] == 'hotel'){ ?>
         <p class="text-white m-0">Merci de contacter votre administrateur.</p>
     </div>
 <?php }
+if(!empty($_GET['error']) && $_GET['error'] == 'deleteSuite'){ ?>
+    <div class="row py-2 text-center bg-danger">
+        <p class="text-white m-0">Une erreur est survenue lors de la suppression de votre suite. Merci de réessayer ultérieurement.</p>
+    </div>
+<?php }
 if(!empty($_GET['success']) && $_GET['success'] == 'addSuite'){ ?>
     <div class="row py-2 text-center bg-success">
         <p class="text-white m-0">Suite ajoutée avec succès !</p>
+    </div>
+<?php }
+if(!empty($_GET['success']) && $_GET['success'] == 'deleteSuite'){ ?>
+    <div class="row py-2 text-center bg-success">
+        <p class="text-white m-0">Votre suite ainsi que ses réservations ont été supprimées avec succès !</p>
     </div>
 <?php }
 ?>
@@ -54,7 +65,7 @@ if(!empty($_GET['success']) && $_GET['success'] == 'addSuite'){ ?>
                                 <h4 class="card-title text-gold"><?= $suitesInfos['title'] ?></h4>
                                 <div class="text-center px-2">
                                     <a class="px-2 btn" href="#" ><i class="bi bi-pencil text-primary"></i></a>
-                                    <a class="px-2 btn" ><i class="bi bi-x-lg text-danger"></i></a>                        
+                                    <a class="px-2 btn" href="#" data-bs-toggle="modal" data-bs-target="#deleteSuite<?= $suitesInfos['id'] ?>"><i class="bi bi-x-lg text-danger"></i></a>                        
                                 </div>
                             </div>
                             <h6 class="card-subtitle mb-2 text-lgrey"><?= $suitesInfos['price'] ?> € la nuit</h6>
@@ -125,9 +136,26 @@ if(!empty($_GET['success']) && $_GET['success'] == 'addSuite'){ ?>
                         </div>
                     </div>
                 </div>
-            <?php }
-
-        }
+            <?php } ?>
+            <!-- MODAL POUR SUPPRIMER SUITE -->
+            <div class="modal fade" id="deleteSuite<?= $suitesInfos['id'] ?>" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header border-0">
+                            <div class="modal-title">
+                                <h5 class="text-gold mb-3">Êtes-vous sûr de vouloir supprimer la suite <?= $suitesInfos['title'] ?> ?</h5>
+                                <p class="text-danger"><i class="bi bi-exclamation-circle-fill text-danger"></i> ATTENTION !!! <br>Cela entrainera la suppression de toutes les réservations pour cette suite.</p>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body d-flex px-md-5 ">
+                            <a class="btn flex-fill me-1 bg-offwhite text-dblue border-gold rounded-pill" data-bs-dismiss="modal">annuler</a>
+                            <a href="./managerDashboard.php?deleteSuite=<?= $suitesInfos['id'] ?>" class="btn flex-fill ms-1 bg-gold text-offwhite rounded-pill">supprimer</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php }
     ?>
 
 </section>
