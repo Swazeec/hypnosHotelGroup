@@ -2,9 +2,9 @@
 session_start();
 require_once('./components/db/db.php');
 if(!isset($_GET['hotel'])){
-    header('location:./adminDashboard.php?manager=invalid');
+    header('location:./adminDashboard.php?modify=invalid');
 } else if(intval($_GET['hotel']) <= 0) {
-    header('location:./adminDashboard.php?manager=invalid');
+    header('location:./adminDashboard.php?modify=invalid');
 } else {
     $hotelId = htmlspecialchars($_GET['hotel']);
     $hotelsReq = $bdd->prepare('SELECT hotels.*, managers.firstname, managers.lastname FROM hotels JOIN managers ON managers.id = hotels.manager_id WHERE hotels.id = :id;');

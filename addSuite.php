@@ -94,7 +94,7 @@ if(!empty($_GET['error']) && $_GET['error'] == 'picture'){ ?>
             </div>
             <!-- BOUTONS -->
             <div class=" d-flex px-md-5 ">
-                <button type="button" class="btn flex-fill me-1 bg-offwhite text-dblue border-gold rounded-pill" data-bs-dismiss="modal">annuler</button>
+                <a href="./managerDashboard.php" class="btn flex-fill me-1 bg-offwhite text-dblue border-gold rounded-pill">annuler</a>
                 <button type="submit" id="addSuiteBtn" name="addSuite" class="btn flex-fill ms-1 bg-gold text-offwhite rounded-pill">ajouter</button>
             </div>
         </form>

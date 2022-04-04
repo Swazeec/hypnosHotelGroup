@@ -68,6 +68,7 @@ if(!isset($_GET['hotel']) && intval($_GET['hotel']) === 0){
                                             <!-- <img src="<?= $suiteInfos['primePicture'] ?>" class="img-fluid card__img" alt="photo suite"> -->
                                         </div>
                                         <p class="card-text pb-2 pb-md-0 py-md-2"><?= $suiteInfos['description'] ?></p>
+                                        <a href="<?= $suiteInfos['link'] ?>" class="card-text pb-2 pb-md-0 py-md-2">Lien booking.com</a>
                                     </div>
                                     <div class="text-center row px-2 d-flex justify-content-center justify-content-md-end">
                                         <?php 

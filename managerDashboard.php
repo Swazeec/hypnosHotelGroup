@@ -25,6 +25,11 @@ if(!empty($_GET['error']) && $_GET['error'] == 'deleteSuite'){ ?>
         <p class="text-white m-0">Une erreur est survenue lors de la suppression de votre suite. Merci de réessayer ultérieurement.</p>
     </div>
 <?php }
+if(!empty($_GET['suite']) && $_GET['suite'] == 'invalid'){ ?>
+    <div class="row py-2 text-center bg-danger">
+        <p class="text-white m-0">Une erreur est survenue lors de la demande de modification. Merci de réessayer ultérieurement.</p>
+    </div>
+<?php }
 if(!empty($_GET['success']) && $_GET['success'] == 'addSuite'){ ?>
     <div class="row py-2 text-center bg-success">
         <p class="text-white m-0">Suite ajoutée avec succès !</p>
@@ -33,6 +38,11 @@ if(!empty($_GET['success']) && $_GET['success'] == 'addSuite'){ ?>
 if(!empty($_GET['success']) && $_GET['success'] == 'deleteSuite'){ ?>
     <div class="row py-2 text-center bg-success">
         <p class="text-white m-0">Votre suite ainsi que ses réservations ont été supprimées avec succès !</p>
+    </div>
+<?php }
+if(!empty($_GET['success']) && $_GET['success'] == 'modifySuite'){ ?>
+    <div class="row py-2 text-center bg-success">
+        <p class="text-white m-0">Votre suite a été modifiée avec succès !</p>
     </div>
 <?php }
 ?>
@@ -57,14 +67,14 @@ if(!empty($_GET['success']) && $_GET['success'] == 'deleteSuite'){ ?>
         $suitesReq->bindValue(':hid', $hotelId, PDO::PARAM_INT);
         $suitesReq->execute();
         while($suitesInfos = $suitesReq->fetch(PDO::FETCH_ASSOC)){ ?>
-            <article class="col-12 col-md-4 mb-3">
+            <article class="col-12 col-md-6 col-lg-4 mb-3">
                 <div class="card h-100">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div class="mb-3">
                             <div class="d-flex justify-content-between">
                                 <h4 class="card-title text-gold"><?= $suitesInfos['title'] ?></h4>
                                 <div class="text-center px-2">
-                                    <a class="px-2 btn" href="#" ><i class="bi bi-pencil text-primary"></i></a>
+                                    <a class="px-2 btn" href="./modifySuite.php?suite=<?= $suitesInfos['id'] ?>" ><i class="bi bi-pencil text-primary"></i></a>
                                     <a class="px-2 btn" href="#" data-bs-toggle="modal" data-bs-target="#deleteSuite<?= $suitesInfos['id'] ?>"><i class="bi bi-x-lg text-danger"></i></a>                        
                                 </div>
                             </div>
@@ -76,7 +86,10 @@ if(!empty($_GET['success']) && $_GET['success'] == 'deleteSuite'){ ?>
                         </div>
                         
                     </div>
-                    <div class="text-center row px-2 d-flex justify-content-center">
+                    <div class="row px-2 d-flex justify-content-center">
+                        <div class="col-12 mb-3">
+                            <a href="<?= $suitesInfos['link'] ?>" class="card-text px-2">Lien booking.com</a>
+                        </div>
                         <?php 
                         $picturesReq = $bdd->prepare('SELECT * FROM pictures WHERE suite_id = :sid ;');
                         $picturesReq->bindValue(':sid', $suitesInfos['id'], PDO::PARAM_INT);
@@ -84,9 +97,9 @@ if(!empty($_GET['success']) && $_GET['success'] == 'deleteSuite'){ ?>
                         // s'il n'y a pas de photos correspondant à la suite dans la table, on désactive le bouton
                         $picturesCount = $picturesReq->rowCount();
                         if($picturesCount === 0) { ?>
-                            <button type="button" class="col-5 btn bg-offwhite border-gold rounded-pill text-dblue px-2 mx-2 mb-3 disabled">galerie d'images</button>
+                            <button type="button" class="col-6 btn bg-offwhite border-gold rounded-pill text-dblue px-2 mx-2 mb-3 disabled">galerie d'images</button>
                         <?php } else { ?>
-                            <button type="button" class="col-5 btn bg-offwhite border-gold rounded-pill text-dblue px-2 mx-2 mb-3" data-bs-toggle="modal" data-bs-target="#suite<?= $suitesInfos['id'] ?>">galerie d'images</button>
+                            <button type="button" class="col-6 btn bg-offwhite border-gold rounded-pill text-dblue px-2 mx-2 mb-3" data-bs-toggle="modal" data-bs-target="#suite<?= $suitesInfos['id'] ?>">galerie d'images</button>
                         <?php } ?>
                     </div>
                 </div>
