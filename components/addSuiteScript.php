@@ -13,12 +13,13 @@ use Aws\S3\S3Client;
 //     $bucket = 'hypnoshotelgroup';
 // }
     
-if (getenv('S3_BUCKET') !== false) {
-    $bucket = getenv('S3_BUCKET');
-} else {
-    header('location:./managerDashboard.php?error=bucket');
-    exit();
-}
+// if (getenv('S3_BUCKET') !== false) {
+//     $bucket = getenv('S3_BUCKET');
+// } else {
+//     header('location:./managerDashboard.php?error=bucket');
+//     exit();
+// }
+$bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
 
 $s3 = new S3Client([
         'region' => 'eu-west-3',
