@@ -1,5 +1,4 @@
 <?php
-require_once('../aws/aws-autoloader.php');
 use Aws\S3\S3Client;
 // si getenv('JAWSDB_URL') est true, c'est que c'est la version en ligne, sinon, version locale
 if(getenv('JAWSDB_URL') !== false){
