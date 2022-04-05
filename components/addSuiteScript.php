@@ -1,26 +1,18 @@
 <?php
-require_once('./aws/aws-autoloader.php');
+require_once('../aws/aws-autoloader.php');
 use Aws\S3\S3Client;
 // si getenv('JAWSDB_URL') est true, c'est que c'est la version en ligne, sinon, version locale
-// if(getenv('JAWSDB_URL') !== false){
-//     if (getenv('S3_BUCKET') !== false) {
-//         $bucket = getenv('S3_BUCKET');
-//     } else {
-//         header('location:./managerDashboard.php?error=bucket');
-//         exit();
-//     }
-// } else {
-//     $bucket = 'hypnoshotelgroup';
-// }
+if(getenv('JAWSDB_URL') !== false){
+    if (getenv('S3_BUCKET') !== false) {
+        $bucket = getenv('S3_BUCKET');
+    } else {
+        header('location:./managerDashboard.php?error=bucket');
+        exit();
+    }
+} else {
+    $bucket = 'hypnoshotelgroup';
+}
     
-// if (getenv('S3_BUCKET') !== false) {
-//     $bucket = getenv('S3_BUCKET');
-// } else {
-//     header('location:./managerDashboard.php?error=bucket');
-//     exit();
-// }
-$bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
-
 $s3 = new S3Client([
         'region' => 'eu-west-3',
         'version' => '2006-03-01'
