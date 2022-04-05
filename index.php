@@ -1,9 +1,9 @@
 <?php
 session_start();
 require_once('./components/db/db.php');
+require('./aws/aws-autoloader.php');
 if(isset($_SESSION['connect'])){
     if($_SESSION['connect'] == 'client'){
-        require('./aws/aws-autoloader.php');
         require_once('./components/header/header-client.php');
     } else if ($_SESSION['connect'] == 'pro'){
         require_once('./components/header/header-pro.php');
