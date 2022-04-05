@@ -12,7 +12,6 @@ if(isset($_SESSION['connect'])){
             if($count === 0){
                 header('location:./managerDashboard.php?error=hotel');
             } else {
-                require_once('./aws/aws-autoloader.php');
                 require_once('./components/addSuiteScript.php');
                 require_once('./components/header/header-pro.php');
                 $hotelId = $hotelIdReq->fetch(PDO::FETCH_ASSOC);

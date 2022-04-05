@@ -1,14 +1,6 @@
 <?php
 session_start();
 require_once('./components/db/db.php');
-require('./aws/aws-autoloader.php');
-
-$bucket = getenv('S3_BUCKET');
-$s3 = new Aws\S3\S3Client([
-        'region' => 'eu-west-3',
-        'version' => '2006-03-01'
-    ]);
-    
 if(isset($_SESSION['connect'])){
     if($_SESSION['connect'] == 'client'){
         require_once('./components/header/header-client.php');

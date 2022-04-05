@@ -1,5 +1,8 @@
 <?php
-// use Aws\S3\S3Client;
+require_once('./aws/aws-autoloader.php');
+
+use Aws\S3\S3Client;
+
 // si getenv('JAWSDB_URL') est true, c'est que c'est la version en ligne, sinon, version locale
 if(getenv('JAWSDB_URL') !== false){
     if (getenv('S3_BUCKET') !== false) {
@@ -12,7 +15,7 @@ if(getenv('JAWSDB_URL') !== false){
     $bucket = 'hypnoshotelgroup';
 }
     
-$s3 = new Aws\S3\S3Client([
+$s3 = new S3Client([
         'region' => 'eu-west-3',
         'version' => '2006-03-01'
     ]);
@@ -24,12 +27,6 @@ if(!empty($_POST['suiteName']) &&
     !empty($_FILES['primePicture'])
 ){
     require_once('./components/functions.php');
-   /*  // INFOS PREALABLES --> dans addSuite.php
-    $manager_id = $_SESSION['proId'];
-    $hotelIdReq = $bdd->prepare('SELECT id FROM hotels WHERE manager_id = :mid ;');
-    $hotelIdReq->bindValue(':mid', $manager_id, PDO::PARAM_INT);
-    $hotelIdReq->execute();
-    $hotelId = $hotelIdReq->fetch(PDO::FETCH_ASSOC); */
 
     // VARIABLES
     $suiteName = htmlspecialchars($_POST['suiteName']);
