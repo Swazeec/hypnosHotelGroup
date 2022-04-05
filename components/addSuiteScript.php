@@ -25,6 +25,7 @@ $s3 = new S3Client([
     $hotelIdReq->bindValue(':mid', $manager_id, PDO::PARAM_INT);
     $hotelIdReq->execute();
     $hotelId = $hotelIdReq->fetch(PDO::FETCH_ASSOC);
+    $hotelId = $hotelId['id'];
 
 
 
