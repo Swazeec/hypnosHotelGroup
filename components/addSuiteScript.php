@@ -1,5 +1,5 @@
 <?php
-use Aws\S3\S3Client;
+// use Aws\S3\S3Client;
 // si getenv('JAWSDB_URL') est true, c'est que c'est la version en ligne, sinon, version locale
 if(getenv('JAWSDB_URL') !== false){
     if (getenv('S3_BUCKET') !== false) {
@@ -12,7 +12,7 @@ if(getenv('JAWSDB_URL') !== false){
     $bucket = 'hypnoshotelgroup';
 }
     
-$s3 = new S3Client([
+$s3 = new Aws\S3\S3Client([
         'region' => 'eu-west-3',
         'version' => '2006-03-01'
     ]);
