@@ -1,22 +1,22 @@
 <?php
-require_once('./aws/aws-autoloader.php');
-// use Aws\S3\S3Client;
-// si getenv('JAWSDB_URL') est true, c'est que c'est la version en ligne, sinon, version locale
-if(getenv('JAWSDB_URL') !== false){
-    if (getenv('S3_BUCKET') !== false) {
-        $bucket = getenv('S3_BUCKET');
-    } else {
-        header('location:./managerDashboard.php?error=bucket');
-        exit();
-    }
-} else {
-    $bucket = 'hypnoshotelgroup';
-}
+// require_once('./aws/aws-autoloader.php');
+// // use Aws\S3\S3Client;
+// // si getenv('JAWSDB_URL') est true, c'est que c'est la version en ligne, sinon, version locale
+// if(getenv('JAWSDB_URL') !== false){
+//     if (getenv('S3_BUCKET') !== false) {
+//         $bucket = getenv('S3_BUCKET');
+//     } else {
+//         header('location:./managerDashboard.php?error=bucket');
+//         exit();
+//     }
+// } else {
+//     $bucket = 'hypnoshotelgroup';
+// }
     
-$s3 = new Aws\S3\S3Client([
-        'region' => 'eu-west-3',
-        'version' => '2006-03-01'
-    ]);
+// $s3 = new Aws\S3\S3Client([
+//         'region' => 'eu-west-3',
+//         'version' => '2006-03-01'
+//     ]);
 
 if(!empty($_POST['suiteName']) &&
     !empty($_POST['price']) &&
