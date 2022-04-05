@@ -15,6 +15,7 @@ if(isset($_SESSION['connect'])){
                 require_once('./components/addSuiteScript.php');
                 require_once('./components/header/header-pro.php');
                 $hotelId = $hotelIdReq->fetch(PDO::FETCH_ASSOC);
+                $hotelId = $hotelId['id'];
             }
 
         } else if($_SESSION['role'] == 'admin' ){

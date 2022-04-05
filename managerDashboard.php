@@ -66,6 +66,7 @@ if(!empty($_GET['success']) && $_GET['success'] == 'modifySuite'){ ?>
         $hotelIdReq->bindValue(':mid', $managerId, PDO::PARAM_INT);
         $hotelIdReq->execute();
         $hotelId = $hotelIdReq->fetch(PDO::FETCH_ASSOC);
+        $hotelId = $hotelId['id'];
 
         //on récupère et affiche les suites concernées
         $suitesReq = $bdd->prepare('SELECT suites.*, prices.price FROM suites JOIN prices ON prices.id = suites.price_id WHERE hotel_id = :hid ORDER BY id DESC;');
