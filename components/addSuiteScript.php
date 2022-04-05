@@ -20,6 +20,14 @@ $s3 = new S3Client([
         'version' => '2006-03-01'
     ]);
 
+    $manager_id = $_SESSION['proId'];
+    $hotelIdReq = $bdd->prepare('SELECT id FROM hotels WHERE manager_id = :mid ;');
+    $hotelIdReq->bindValue(':mid', $manager_id, PDO::PARAM_INT);
+    $hotelIdReq->execute();
+    $hotelId = $hotelIdReq->fetch(PDO::FETCH_ASSOC);
+
+
+
 if(!empty($_POST['suiteName']) &&
     !empty($_POST['price']) &&
     !empty($_POST['description']) &&
