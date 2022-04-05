@@ -3,7 +3,7 @@ require('./aws/aws-autoloader.php');
 use Aws\S3\S3Client;
 // si getenv('JAWSDB_URL') est true, c'est que c'est la version en ligne, sinon, version locale
 if(getenv('JAWSDB_URL') !== false){
-    if (!empty(getenv('S3_BUCKET'))) {
+    if (getenv('S3_BUCKET') !== false) {
         $bucket = getenv('S3_BUCKET');
     } else {
         header('location:./managerDashboard.php?error=bucket');
