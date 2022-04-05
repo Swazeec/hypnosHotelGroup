@@ -1,7 +1,17 @@
 <?php
 require('./aws/aws-autoloader.php');
 use Aws\S3\S3Client;
-$bucket = 'hypnoshotelgroup';
+// si getenv('JAWSDB_URL') est true, c'est que c'est la version en ligne, sinon, version locale
+if(getenv('JAWSDB_URL') !== false){
+    if (!empty(getenv('S3_BUCKET'))) {
+        $bucket = getenv('S3_BUCKET');
+    } else {
+        header('location:./managerDashboard.php?error=bucket');
+        exit();
+    }
+} else {
+    $bucket = 'hypnoshotelgroup';
+}
     
 $s3 = new S3Client([
         'region' => 'eu-west-3',
@@ -62,6 +72,7 @@ if(!empty($_POST['suiteName']) &&
         $addSuiteReq->bindValue(':pid', $price, PDO::PARAM_INT);
         $addSuiteReq->bindValue(':hid', $hotelId, PDO::PARAM_INT);
         if($addSuiteReq->execute()){
+            
             // SI IMAGES POUR GALERIE
             if(isset($_FILES['galeriePictures'])){
                 // RECUPERER ID SUITE
@@ -96,16 +107,12 @@ if(!empty($_POST['suiteName']) &&
                         $addPictReq->execute();
                         
                         header('location:./managerDashboard.php?success=addSuite');
-                        // xxxxnnvyzrbsgfwijèi <- quand on garde les enfants en travaillant...
                     } 
                 } else {
-                        header('location:./addSuite.php?error=galeriePicture');
-                    }
-    
-    
-            } else {
-                header('location:./managerDashboard.php?success=addSuite');
+                    header('location:./addSuite.php?error=galeriePicture');
+                }
             }
+            header('location:./managerDashboard.php?success=addSuite');
 
         } else {
             header('location:./addSuite.php?error=addSuite');

@@ -20,6 +20,11 @@ if(!empty($_GET['error']) && $_GET['error'] == 'hotel'){ ?>
         <p class="text-white m-0">Merci de contacter votre administrateur.</p>
     </div>
 <?php }
+if(!empty($_GET['error']) && $_GET['error'] == 'bucket'){ ?>
+    <div class="row py-2 text-center bg-danger">
+        <p class="text-white m-0">Un problème est survenu avec le service d'upload d'images. Merci de contacter votre administrateur.</p>
+    </div>
+<?php }
 if(!empty($_GET['error']) && $_GET['error'] == 'deleteSuite'){ ?>
     <div class="row py-2 text-center bg-danger">
         <p class="text-white m-0">Une erreur est survenue lors de la suppression de votre suite. Merci de réessayer ultérieurement.</p>

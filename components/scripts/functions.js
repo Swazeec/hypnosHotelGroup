@@ -65,4 +65,4 @@ function checkURL(value){
     return true
 }
 
-// module.exports =  {checkName, checkEmail, checkPwd, checkTopic, checkMessage, checkId, checkAddress}
+module.exports =  {checkName, checkEmail, checkPwd, checkTopic, checkMessage, checkId, checkAddress}
