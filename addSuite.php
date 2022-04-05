@@ -12,9 +12,9 @@ if(isset($_SESSION['connect'])){
             if($count === 0){
                 header('location:./managerDashboard.php?error=hotel');
             } else {
-                $hotelId = $hotelIdReq->fetch(PDO::FETCH_ASSOC);
                 require_once('./components/addSuiteScript.php');
                 require_once('./components/header/header-pro.php');
+                $hotelId = $hotelIdReq->fetch(PDO::FETCH_ASSOC);
             }
 
         } else if($_SESSION['role'] == 'admin' ){
