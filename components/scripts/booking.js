@@ -47,7 +47,8 @@ bookingBtn.addEventListener('click', (e)=>{
                 if(available === true){
                     suiteAvailable.classList.remove('d-none')
                     suiteUnavailable.classList.add('d-none')
-                    bookingBtn.classList.add('d-none')
+                    bookingBtn.classList.remove('bg-gold', 'text-offwhite')
+                    bookingBtn.classList.add('bg-offwhite', 'border-gold')
                 } else {
                     suiteUnavailable.classList.remove('d-none')
                     suiteAvailable.classList.add('d-none')

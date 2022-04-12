@@ -2,6 +2,20 @@
 session_start();
 require_once('./components/db/db.php');
 require_once('./components/bookingScript.php');
+if(isset($_GET['suite'])){
+    if(intval($_GET['suite']) > 0){
+        $suiteId = intval($_GET['suite']);
+        $sIdReq = $bdd->prepare('SELECT id FROM suites WHERE id = :id ;');
+        $sIdReq->bindValue(':id', $suiteId, PDO::PARAM_INT);
+        $sIdReq->execute();
+        $count = $sIdReq->rowCount();
+        if($count !=1){
+            header('location:./booking.php');
+        }
+    } else {
+        header('location:./booking.php');
+    }
+}
 if(isset($_SESSION['connect'])){
     if($_SESSION['connect'] == 'client'){
         require_once('./components/header/header-client.php');
@@ -47,14 +61,28 @@ if(!empty($_GET['error']) && $_GET['error'] == 'connexion'){ ?>
                 <label for="suite" class="form-label text-gold">Votre suite</label>
                 <select class="form-select " id="suite" name="suite" required>
                     <?php
-                    // POUR AFFICHAGE SUITES
-                    $suitesReq = $bdd->prepare('SELECT suites.id AS id, suites.title AS suite, hotels.name AS hotel, hotels.city
-                                                FROM suites
-                                                JOIN hotels ON hotels.id = suites.hotel_id');
-                    $suitesReq->execute();
-                    while($suiteInfos = $suitesReq->fetch(PDO::FETCH_ASSOC)){ ?>
+                    // SUITE PRESELECTIONNEE ?
+                    if(!empty($_GET['suite'])){
+                        // RAPPEL : $suiteId = intval($_GET['suite']);
+                        $suitesReq = $bdd->prepare('SELECT suites.id AS id, suites.title AS suite, hotels.name AS hotel, hotels.city
+                                                    FROM suites
+                                                    JOIN hotels ON hotels.id = suites.hotel_id
+                                                    WHERE suites.id = :id ;');
+                        $suitesReq->bindValue(':id', $suiteId, PDO::PARAM_INT);
+                        $suitesReq->execute();
+                        $suiteInfos = $suitesReq->fetch(PDO::FETCH_ASSOC); ?>
                         <option value="<?= $suiteInfos['id'] ?>"><?= $suiteInfos['hotel'] ?> (<?= $suiteInfos['city'] ?>) - Suite <?= $suiteInfos['suite'] ?></option>
-                    <?php }
+
+                    <?php } else {
+                        // POUR AFFICHAGE DE TOUTES LES SUITES
+                        $suitesReq = $bdd->prepare('SELECT suites.id AS id, suites.title AS suite, hotels.name AS hotel, hotels.city
+                                                    FROM suites
+                                                    JOIN hotels ON hotels.id = suites.hotel_id');
+                        $suitesReq->execute();
+                        while($suiteInfos = $suitesReq->fetch(PDO::FETCH_ASSOC)){ ?>
+                            <option value="<?= $suiteInfos['id'] ?>"><?= $suiteInfos['hotel'] ?> (<?= $suiteInfos['city'] ?>) - Suite <?= $suiteInfos['suite'] ?></option>
+                        <?php }
+                    }
                     ?>
                 </select>
                 <div id="suiteHelp" class="form-text text-danger d-none">Veuillez sélectionner une suite</div>
@@ -69,6 +97,7 @@ if(!empty($_GET['error']) && $_GET['error'] == 'connexion'){ ?>
                 <input type="date" class="form-control" id="endDate" name="endDate" required>
                 <div id="endDateHelp" class="form-text text-danger d-none">Veuillez entrer une date valide</div>
             </div>
+            <button type="btn" id="bookingBtn" class="btn bg-gold rounded-pill text-offwhite my-4 col-8 offset-2 col-md-6 offset-md-3" >Vérifier la disponibilité</button>
             <div class="mb-3 col-12 d-none" id="available">
                 <h4 class="text-gold mb-3">Bonne nouvelle !</h4>
                 <p id="availability">La suite est disponible aux dates demandées. Il ne vous reste plus qu'à valider !</p>
@@ -85,7 +114,6 @@ if(!empty($_GET['error']) && $_GET['error'] == 'connexion'){ ?>
                 <h4 class="text-gold mb-3" >Oupsi...</h4>
                 <p >La suite n'est pas disponible aux dates demandées. Vous pouvez changer de suite, ou de dates !</p>
             </div>
-            <button type="btn" id="bookingBtn" class="btn bg-gold rounded-pill text-offwhite my-4 col-8 offset-2 col-md-6 offset-md-3" >Vérifier la disponibilité</button>
         </form>
     </div>
 </section>
