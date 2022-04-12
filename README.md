@@ -2,7 +2,7 @@
 ***
 Réalisation ECF - Studi 2022
 ***
-Hypnos est un groupe hôtelier de luxe souhaitant gérer en interne les services de présentation et de réservation de chambre. C'est pourquoi nous avons lancé le projet **Hypnos Hotel Group** avec la réalisation d'une application web et web mobile. Grâce à ce site, tout le monde peut découvrir l'ensemble de l'offre Hypnos et vérifier les disponibilités de chaque chambre. La réservation étant destinée aux clients connectés, les visiteurs ont la possibilité de s'incrire et se connecter. Concernant la gestion : un espace professionnel est réservé à l'administrateur (qui gère ce qui est relatifs aux hôtels) et aux managers (qui gèrent chacun leur hôtel et les suites associées.)
+Hypnos est un groupe hôtelier de luxe souhaitant gérer en interne les services de présentation et de réservation de chambre. C'est pourquoi nous avons lancé le projet **Hypnos Hotel Group** avec la réalisation d'une application web et web mobile. Grâce à ce site, tout le monde peut découvrir l'ensemble de l'offre Hypnos et vérifier les disponibilités de chaque chambre. La réservation étant destinée aux clients connectés, les visiteurs ont la possibilité de s'incrire et se connecter. Concernant la gestion : un espace professionnel est réservé à l'administrateur (qui gère ce qui est relatif aux hôtels) et aux managers (qui gèrent chacun leur hôtel et les suites associées.)
 ***
 ## SOMMAIRE
 1. [Statut du projet](#statut-du-projet)
@@ -32,7 +32,12 @@ Le projet est à présent sur votre machine en local.
 Pour tester le projet en local, lancez xampp, mamp, ou le logiciel que vous utilisez sur votre machine, activez Apache et MySQL. 
 
 ### Insérer le fichier SQL dans la bdd
-Utilisez le fichier scriptSQL.sql situé dans le dossier deployment du projet pour créer votre base de données.
+Utilisez le fichier scriptSQL.sql situé dans le dossier deployment du projet pour créer votre base de données. Attention, pour pouvoir utiliser les différents comptes utilisateur, pensez à changer les mots de passe et à les encoder avant de lancer les requêtes. Nous vous recommandons d'utiliser le service en ligne https://www.bcrypt.fr/ . Pensez à garder une trace des mots de passe non cryptés dans un coffre-fort ou tout autre fichier sécurisé. Sinon, vous ne pourrez pas vous connecter.
+Par exemple, pour créer un compte administrateur, vous pouvez utiliser cette requête :
+```
+INSERT INTO admins (firstname, lastname, email, password) VALUES ('aaa', 'bbb', 'ccc', 'ddd' );
+```
+où aaa correspond au prénom, bbb au nom de famille, ccc à l'adresse email et ddd au mot de passe choisi **et encodé**.
 
 ### Renseigner les variables d’environnement
 Dans le fichier db.php, situé dans components>db, spécifier vos identifiants de connexion.
@@ -55,6 +60,7 @@ Réaliser la commande suivante en étant dans le dossier principal :
 * CSS 3
 * Bootstrap 5.1
 * Javascript
+* MochaJs
 
 ### Back 
 * PHP 8.1 / PDO
