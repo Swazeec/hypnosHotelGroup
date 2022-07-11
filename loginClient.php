@@ -55,7 +55,8 @@ if(isset($_GET['signup']) && $_GET['signup'] == 'success'){ ?>
                 <input type="password" class="form-control" id="passwordLogIn" name="passwordLogIn" required>
                 <div id="pwdLogHelp" class="form-text text-danger d-none">Votre mot de passe est incorrect</div>
             </div>
-            <button type="submit" class="btn bg-gold rounded-pill text-offwhite my-4 col-8 offset-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4" id="logBtn">Se connecter</button>
+            <button type="submit" class="btn bg-gold rounded-pill text-offwhite my-4 col-8 offset-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4" 
+                    id="logBtn">Se connecter</button>
         </form>
     </div>
     

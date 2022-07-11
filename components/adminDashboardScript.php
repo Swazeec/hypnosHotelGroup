@@ -32,10 +32,10 @@ if(isset($_POST['addManager'])){
             $password = password_hash($password, PASSWORD_BCRYPT);
             $newManager = $bdd->prepare('INSERT INTO managers (firstname, lastname, email, password) 
                                         VALUES (:fn, :ln, :email, :pw);');
-            $newManager->bindValue(':fn', $firstname);
-            $newManager->bindValue(':ln', $lastname);
-            $newManager->bindValue(':email', $email);
-            $newManager->bindValue(':pw', $password);
+            $newManager->bindValue(':fn', $firstname, PDO::PARAM_STR);
+            $newManager->bindValue(':ln', $lastname, PDO::PARAM_STR);
+            $newManager->bindValue(':email', $email, PDO::PARAM_STR);
+            $newManager->bindValue(':pw', $password, PDO::PARAM_STR);
             $newManager->execute();
             header('location:./adminDashboard.php?success=addManager');
         }

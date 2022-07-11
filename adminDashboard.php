@@ -136,19 +136,19 @@ if(!empty($_GET['success']) && $_GET['success'] == 'addHotel'){ ?>
 
                     <!-- Modal supprimer manager -->
                         <div class="modal fade" id="deleteManager<?= $manager['id']?>" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header border-0">
-                                            <h5 class="modal-title text-gold" id="manager<?= $manager['id']?>Label">Êtes-vous sûr de vouloir supprimer <?= $manager['firstname'].' '. $manager['lastname'] ?> ?</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body d-flex px-md-5 ">
-                                            <a class="btn flex-fill me-1 bg-offwhite text-dblue border-gold rounded-pill" data-bs-dismiss="modal">annuler</a>
-                                            <a href="./adminDashboard.php?deleteManager=<?= $manager['id']?>" class="btn flex-fill ms-1 bg-gold text-offwhite rounded-pill">supprimer</a>
-                                        </div>
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header border-0">
+                                        <h5 class="modal-title text-gold" id="manager<?= $manager['id']?>Label">Êtes-vous sûr de vouloir supprimer <?= $manager['firstname'].' '. $manager['lastname'] ?> ?</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body d-flex px-md-5 ">
+                                        <a class="btn flex-fill me-1 bg-offwhite text-dblue border-gold rounded-pill" data-bs-dismiss="modal">annuler</a>
+                                        <a href="./adminDashboard.php?deleteManager=<?= $manager['id']?>" class="btn flex-fill ms-1 bg-gold text-offwhite rounded-pill">supprimer</a>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     <?php }
                     ?>
                 </div>
@@ -164,7 +164,7 @@ if(!empty($_GET['success']) && $_GET['success'] == 'addHotel'){ ?>
                                 <form action="" method="post">
                                     <div class="mb-3 col-12">
                                         <label for="newfirstname" class="form-label text-gold">Prénom</label>
-                                        <input type="text" class="form-control" id="newfirstname" name="newfirstname" required>
+                                        <input type="text" class="form-control" id="newfirstname" name="newfirstname" required >
                                         <div id="newfirstnameHelp" class="form-text text-danger d-none">Veuillez entrer un prénom valide</div>
                                     </div>
                                     <div class="mb-3 col-12">

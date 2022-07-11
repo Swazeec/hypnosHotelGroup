@@ -75,7 +75,8 @@ if(!empty($_GET['error']) && $_GET['error'] ==='invalid'){ ?>
                             $today = date('Y-m-d');
                             if($today < $booking['cancellationDate']){ ?>
                                 <div class="text-end">
-                                    <a type="button" href="./myBookings.php?delete=<?=$booking['id'] ?>" class="btn bg-offwhite border-gold rounded-pill text-gold px-5">Annuler</a>
+                                    <a type="button" href="./myBookings.php?delete=<?=$booking['id'] ?>" 
+                                        class="btn bg-offwhite border-gold rounded-pill text-gold px-5">Annuler</a>
                                 </div>
                             <?php }
                             ?>

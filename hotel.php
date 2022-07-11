@@ -57,7 +57,6 @@ if(!isset($_GET['hotel']) && intval($_GET['hotel']) === 0){
                             <div class="row">
                                 <div class="d-none d-md-block col-md-5 col-lg-4">
                                     <p class="card__img" style="background-image: url('<?= $suiteInfos['primePicture'] ?>');"></p>
-                                    <!-- <img src="<?= $suiteInfos['primePicture'] ?>" class="img-fluid card__img" alt="photo suite"> -->
                                 </div>
                                 <div class="col-12 col-md-7 col-lg-8 d-flex flex-column justify-content-between">
                                     <div class="mb-3 px-0">
@@ -65,7 +64,6 @@ if(!isset($_GET['hotel']) && intval($_GET['hotel']) === 0){
                                         <h6 class="card-subtitle mb-2 text-lgrey">à partir de <?= $suiteInfos['price'] ?> € la nuit</h6>
                                         <div class="d-md-none">
                                             <p class="card__img" style="background-image: url('<?= $suiteInfos['primePicture'] ?>');"></p>
-                                            <!-- <img src="<?= $suiteInfos['primePicture'] ?>" class="img-fluid card__img" alt="photo suite"> -->
                                         </div>
                                         <p class="card-text pb-2 pb-md-0 py-md-2"><?= $suiteInfos['description'] ?></p>
                                         <a href="<?= $suiteInfos['link'] ?>" class="card-text pb-2 pb-md-0 py-md-2">Lien booking.com</a>
@@ -80,14 +78,14 @@ if(!isset($_GET['hotel']) && intval($_GET['hotel']) === 0){
                                         if($picturesCount === 0) { ?>
                                             <button type="button" class="col-5 btn bg-offwhite border-gold rounded-pill text-dblue px-2 mx-2 disabled">galerie d'images</button>
                                         <?php } else { ?>
-                                            <button type="button" class="col-5 btn bg-offwhite border-gold rounded-pill text-dblue px-2 mx-2" data-bs-toggle="modal" data-bs-target="#suite<?= $suiteInfos['id'] ?>">galerie d'images</button>
+                                            <button type="button" class="col-5 btn bg-offwhite border-gold rounded-pill text-dblue px-2 mx-2" 
+                                            data-bs-toggle="modal" data-bs-target="#suite<?= $suiteInfos['id'] ?>">galerie d'images</button>
                                         <?php } ?>
                                         <a type="button" href="./booking.php?suite=<?= $suiteInfos['id'] ?>" class="col-5 btn bg-gold rounded-pill text-offwhite px-2 mx-2">réserver</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
                     </article>
                     <!-- MODALE GALERIE IMAGES SI IMAGES DISPOS -->
                     <?php 
@@ -107,16 +105,14 @@ if(!isset($_GET['hotel']) && intval($_GET['hotel']) === 0){
                                             for($i = 0; $i < count($pictures) ; $i++){
                                                 if($i == 0){ ?>
                                                     <div class="carousel-item active">
-                                                        <img src="<?= $pictures[$i]['picture'] ?>" class="d-block w-100" alt="...">
+                                                        <img src="<?= $pictures[$i]['picture'] ?>" class="d-block w-100" alt="photo, suite <?= $suiteInfos['title'] ?>">
                                                     </div>
                                                 <?php } else { ?>
                                                     <div class="carousel-item">
-                                                        <img src="<?= $pictures[$i]['picture'] ?>" class="d-block w-100" alt="...">
+                                                        <img src="<?= $pictures[$i]['picture'] ?>" class="d-block w-100" alt="photo, suite <?= $suiteInfos['title'] ?>">
                                                     </div>
                                                 <?php 
-
                                                 }
-
                                             }
                                             ?>
                                         </div>
@@ -131,7 +127,7 @@ if(!isset($_GET['hotel']) && intval($_GET['hotel']) === 0){
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn bg-gold text-offwhite rounded-pill px-5" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn bg-gold text-offwhite rounded-pill px-5" data-bs-dismiss="modal">Fermer</button>
                                 </div>
                                 </div>
                             </div>

@@ -16,7 +16,7 @@ function checkPwd(value){
 
 function checkName(value){
     let rgxNames = /^[a-zA-ZÀ-ž\-\'\ ]*$/g
-    if(!rgxNames.test(value) || value.length < 2 || value === true  || value > 60){
+    if(!rgxNames.test(value) || value.length < 2 || value === true  || value.length > 60){
         return false
     }
     return true

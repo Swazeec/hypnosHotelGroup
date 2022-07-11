@@ -4,26 +4,33 @@ const assert = require('assert')
 
 // VERIFICATION NOM / PRENOM
 describe(`Test de la valeur de l'input nom ou prénom`, function(){
-    it(`devrait tester si la valeur est contient des lettres`, function(){
+    it(`devrait tester si la valeur ne contient que des lettres`, function(){
         assert.equal(checkName('Paul'), true)
         assert.equal(checkName('Jeau-Paul'), true)
         assert.equal(checkName('François'), true)
         assert.equal(checkName('Ra\'s al Ghul'), true)
     })
-    it(`devrait tester si la valeur est ne contient pas de chiffre`, function(){
+    it(`devrait tester si la valeur ne contient pas de chiffre`, function(){
         assert.equal(checkName('Paul6'), false)
         assert.equal(checkName('123'), false)
         assert.equal(checkName(23), false)
     })
-    it(`devrait tester si la valeur est ne contient pas de caractère non autorisé`, function(){
+    it(`devrait tester si la valeur ne contient pas de caractère non autorisé`, function(){
         assert.equal(checkName('Paul@'), false)
         assert.equal(checkName('$paule'), false)
         assert.equal(checkName('*paule'), false)
         assert.equal(checkName('#s'), false)
         assert.equal(checkName('puç'), true)
     })
-    it(`devrait tester si la valeur est ne contient pas de booléen`, function(){
+    it(`devrait tester si la valeur ne contient pas de booléen`, function(){
         assert.equal(checkName(true), false)
+    })
+    it(`devrait tester si la valeur possède une longueur autorisée`, function(){
+        assert.equal(checkName('Paul'), true)
+        assert.equal(checkName('A'), false)
+        assert.equal(checkName('Ao'), true)
+        assert.equal(checkName('PaulPaulPaulPaulPaulPaulPaulPaulPaulPaulPaulPaulPaulPaulPaul'), true) /* 60 caractères */
+        assert.equal(checkName('PaulPaulPaulPaulPaulPaulPaulPaulPaulPaulPaulPaulPaulPaulPaulP'), false) /* 61 caractères */
     })
 })
 
